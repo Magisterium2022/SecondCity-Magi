@@ -72,10 +72,10 @@
 		CheckEyewitness(src, src, 7, FALSE)
 	. = ..()
 
-/mob/living/carbon/lupus/update_soak() //Pretty basic calculation for the average person/being, soak is Bashing only using Stamina.
-	bashing_soak = st_get_stat(STAT_STAMINA)
-	lethal_soak = st_get_stat(STAT_STAMINA)
+/mob/living/carbon/lupus/update_soak() //Garou can soak Bashing and Lethal as normal, and Aggravated in everything except their breed form, barring Metis.
+	soak_dice_bashing = st_get_stat(STAT_STAMINA)
+	soak_dice_lethal = st_get_stat(STAT_STAMINA)
 	if client.prefs.auspice.breed_form = "Lupus"
 		return
 	else
-		aggravated_soak = st_get_stat(STAT_STAMINA)
+		soak_dice_aggravated = st_get_stat(STAT_STAMINA)
