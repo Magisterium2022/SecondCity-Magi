@@ -131,3 +131,8 @@
 	var/obscured_slots = NONE
 	/// Covered hide flags (hideflags that can be seen, BUT can't be interacted with)
 	var/covered_slots = NONE
+
+	///The number of dice available to soak bashing, lethal, and aggravated damage
+	var/soak_dice_bashing = 0
+	var/soak_dice_lethal = 0
+	var/soak_dice_aggravated = 0
