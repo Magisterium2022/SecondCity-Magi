@@ -71,3 +71,11 @@
 	if(hispo)
 		CheckEyewitness(src, src, 7, FALSE)
 	. = ..()
+
+/mob/living/carbon/lupus/update_soak() //Pretty basic calculation for the average person/being, soak is Bashing only using Stamina.
+	bashing_soak = st_get_stat(STAT_STAMINA)
+	lethal_soak = st_get_stat(STAT_STAMINA)
+	if client.prefs.auspice.breed_form = "Lupus"
+		return
+	else
+		aggravated_soak = st_get_stat(STAT_STAMINA)
