@@ -1368,3 +1368,6 @@
 /mob/living/carbon/get_bloodtype()
 	RETURN_TYPE(/datum/blood_type)
 	return dna?.blood_type
+
+/mob/living/carbon/update_soak() //Pretty basic calculation for the average person/being, soak is Bashing only using Stamina.
+	bashing_soak = st_get_stat(STAT_STAMINA)
