@@ -30,6 +30,8 @@
 
 	var/victim_sucesses = 0
 	var/diablerist_sucesses = 0
+	var/victim_difficulty = 
+	var/diablerist_difficulty clamp(mob_human.PERMANENT_WILLPOWER + max((initial_generation_difference - generational_difference), 0), 4, 9)
 	var/victor_decided = FALSE
 
 	while (victor_decided = FALSE)
