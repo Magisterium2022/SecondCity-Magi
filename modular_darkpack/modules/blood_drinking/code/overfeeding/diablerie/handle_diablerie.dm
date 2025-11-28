@@ -5,6 +5,10 @@
 	var/mob/living/carbon/human/mob_human = mob
 	AdjustHumanity(-1, 0)
 
+	if(!HAS_TRAIT(mob_human, TRAIT_TORPOR))
+		var/dice_result = SSroll.storyteller_roll(user.st_get_stat(STAT_STRENGTH), 10, user, user, TRUE)
+
+
 	if(mob_human.generation >= generation)
 		message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
 		log_attack("[key_name(src)] successfully Diablerized [key_name(mob)].")
