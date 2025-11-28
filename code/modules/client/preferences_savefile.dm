@@ -366,6 +366,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
+	// DARKPACK EDIT ADD - STORYTELLR_STATS
+	storyteller_stats = save_data?["storyteller_stats"]
+	storyteller_stat_points = save_data?["storyteller_stat_points"]
+	// DARKPACK EDIT END
 
 	//try to fix any outdated data if necessary
 	//preference updating will handle saving the updated data for us.
@@ -383,6 +387,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			job_preferences -= j
 
 	all_quirks = SSquirks.filter_invalid_quirks(SANITIZE_LIST(all_quirks))
+
+	// DARKPACK EDIT ADD START - STORYTELLER_STATS
+	storyteller_stats = SANITIZE_LIST(storyteller_stats)
+	storyteller_stat_points = SANITIZE_LIST(storyteller_stat_points)
+	storyteller_stats = SSstats.sanitize_stat_list(storyteller_stats)
+	storyteller_stat_points = SSstats.sanitize_points_list(storyteller_stat_points)
+	// DARKPACK EDIT ADD END
+
 	validate_quirks()
 
 	return TRUE
@@ -424,6 +436,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Quirks
 	save_data["all_quirks"] = all_quirks
+	// DARKPACK EDIT ADD - TTRPG Preferences
+	save_data["storyteller_stats"] = storyteller_stats
+	save_data["storyteller_stat_points"] = storyteller_stat_points
+	// DARKPACK EDIT END
 
 	return TRUE
 
