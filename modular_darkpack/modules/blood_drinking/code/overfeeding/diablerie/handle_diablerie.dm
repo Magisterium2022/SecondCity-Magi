@@ -5,8 +5,12 @@
 	var/mob/living/carbon/human/mob_human = mob
 	AdjustHumanity(-1, 0)
 
+	if(mob_human.stat == DEAD) //If they have Iron Gullet, they can drink from a corpse still, so adding s check here to prevent diablerie of someone who was FD'ed.
+		to_chat(src, span_userdanger("<b>[mob_human] has suffered Final Death, and their soul has fled.</b>"))
+		return
+
 	while(!HAS_TRAIT(mob_human, TRAIT_TORPOR))
-		if(mob_human.stat == DEAD) //In case they skip torpor or die
+		if(mob_human.stat == DEAD) //In case they skip torpor or die suddenly.
 			break
 		var/dice_result = SSroll.storyteller_roll(user.st_get_stat(STAT_STRENGTH), 10, user, user, TRUE)
 		mob_humanadjustAggLoss((dice_result * 30), forced = TRUE)
