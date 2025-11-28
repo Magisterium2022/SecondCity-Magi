@@ -13,7 +13,7 @@
 		if(mob_human.stat == DEAD) //In case they skip torpor or die suddenly.
 			break
 		var/dice_result = SSroll.storyteller_roll(user.st_get_stat(STAT_STRENGTH), 10, user, user, TRUE)
-		mob_humanadjustAggLoss((dice_result * 30), forced = TRUE)
+		mob_human.adjustAggLoss((dice_result * 30), forced = TRUE)
 
 	if(mob_human.generation >= generation)
 		message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
