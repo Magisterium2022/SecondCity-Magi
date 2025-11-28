@@ -5,9 +5,11 @@
 	var/mob/living/carbon/human/mob_human = mob
 	AdjustHumanity(-1, 0)
 
-	if(!HAS_TRAIT(mob_human, TRAIT_TORPOR))
+	while(!HAS_TRAIT(mob_human, TRAIT_TORPOR))
+		if(mob_human.stat == DEAD) //In case they skip torpor or die
+			break
 		var/dice_result = SSroll.storyteller_roll(user.st_get_stat(STAT_STRENGTH), 10, user, user, TRUE)
-
+		mob_humanadjustAggLoss((dice_result * 30), forced = TRUE)
 
 	if(mob_human.generation >= generation)
 		message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
