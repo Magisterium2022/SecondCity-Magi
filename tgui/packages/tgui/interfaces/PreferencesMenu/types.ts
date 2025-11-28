@@ -190,6 +190,21 @@ export type PreferencesMenuData = {
   max_personalities: number;
   mood_enabled: BooleanLike;
   species_disallowed_quirks: string[];
+  // DARKPACK EDIT ADD START
+  stats: Record<string, number>;
+  points: Record<string, number>;
+  static_stats: Record<
+    string,
+    {
+      name: string;
+      desc: string;
+      max_score: number;
+      editable: number;
+      category: string;
+      subcategory: string;
+    }
+  >;
+  // DARKPACK EDIT ADD END
 
   antag_bans?: string[];
   antag_days_left?: Record<string, number>;
