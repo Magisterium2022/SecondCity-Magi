@@ -16,6 +16,7 @@
 		mob_human.adjustAggLoss((dice_result * 30), forced = TRUE)
 
 	var/generation_difference = (generation - mob_human.generation) //Subtracts victim's generation from diablerist to get the difference in generations as a positive.
+	var/initial_generation_difference = generation_difference
 	if(generation_difference > 0)
 		generation -= 1 //Initial drop in generation, this is free as long as you're diablerising someone lower gen.
 		generation_difference -=1
@@ -27,9 +28,12 @@
 			else
 				break
 
+	var/victim_sucesses = 0
+	var/diablerist_sucesses = 0
+	var/victor_decided = FALSE
 
-			
-
+	while (victor_decided = FALSE)
+		
 
 	if(mob_human.generation >= generation)
 		message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
