@@ -112,6 +112,11 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 		/datum/discipline_power/thaumaturgy/path/conjuring/three
 	)
 
+/datum/discipline_power/thaumaturgy/path/conjuring/one/activate()
+	. = ..()
+
+	chosen_object = switch(GLOB.conjuring_options.CAT_SIMPLE)
+
 //PERMANENCY - Level 2
 /datum/discipline_power/thaumaturgy/path/conjuring/two
 	name = "Permanency"
@@ -139,5 +144,9 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 /datum/discipline_power/thaumaturgy/path/conjuring/three/activate()
 	. = ..()
 
-	chosen_object = switch(conjuring_options)
-	
+	chosen_object = switch(GLOB.conjuring_options)
+		if(CAT_SIMPLE)
+		if(CAT_MELEE)
+		if(CAT_RANGED)
+		if(CAT_AMMO)
+		if(CAT_MISC)
