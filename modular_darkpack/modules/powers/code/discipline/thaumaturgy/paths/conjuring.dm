@@ -120,13 +120,13 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 		if(>=5)
 			return
 		if(4)
-			chosen_item name = 
+			chosen_item.name = "Odd [name]"
 		if(3)
-
+			chosen_item.name = "Damaged [name]"
 		if(2)
-
+			chosen_item.name = "Shoddy [name]"
 		if(1)
-
+			chosen_item.name = "Crude [name]"
 
 //PERMANENCY - Level 2
 /datum/discipline_power/thaumaturgy/path/conjuring/two
@@ -161,3 +161,27 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 		if(CAT_RANGED)
 		if(CAT_AMMO)
 		if(CAT_MISC)
+
+	switch(copy_quality)
+		if(>=5)
+			return
+		if(4)
+			chosen_item.name = "Odd [name]"
+			for(/obj/item/gun/ballistic)
+				can_misfire = TRUE
+				misfire_probability += 5
+		if(3)
+			chosen_item.name = "Damaged [name]"
+			for(/obj/item/gun/ballistic)
+				can_misfire = TRUE
+				misfire_probability += 10
+		if(2)
+			chosen_item.name = "Shoddy [name]"
+			for(/obj/item/gun/ballistic)
+				can_misfire = TRUE
+				misfire_probability += 15
+		if(1)
+			chosen_item.name = "Crude [name]"
+			for(/obj/item/gun/ballistic)
+				can_misfire = TRUE
+				misfire_probability += 20
