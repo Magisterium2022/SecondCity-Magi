@@ -14,17 +14,18 @@
 	var/copy_quality = 0 //The quality of the copy. <5 means there are defects, leading to reduced reliability.
 	var/chosen_object = null //The object which has been chosen to be conjured.
 
-GLOBAL_LIST_INIT(conjuring_options, list(
-	//Materially simple objects. Anything which is just one material in a basic shape. 
-	CAT_SIMPLE = list( 
+
+
+	// Materially simple objects. Anything which is just one material in a basic shape.
+	var/list/simple_conjured_items
 	/obj/item/vampire_stake,
 	/obj/item/melee/baseball_bat/vamp,
 	/obj/item/melee/vamp/tire,
 	/obj/item/melee/baton/vamp,
 	/obj/item/melee/vamp/brick
-	),
+
 	//Materially and/or mechanically complex melee weapons. Effectively, anything which isn't a single piece of one material.
-	CAT_MELEE = list(
+	var/list/conjured_melee_weapons
 	/obj/item/fireaxe/vamp,
 	/obj/item/katana/vamp,
 	/obj/item/fireaxe/vamp,
@@ -40,9 +41,9 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/switchblade/vamp,
 	/obj/item/darkpack/spear,
 	/obj/item/instrument/eguitar/vamp
-	),
+
 	//Ranged weapons
-	CAT_RANGED = list(
+	var/list/conjured_ranged_weapons
 	/obj/item/gun/ballistic/revolver/darkpack/magnum,
 	/obj/item/gun/ballistic/revolver/darkpack/snub,
 	/obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
@@ -63,9 +64,9 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/gun/ballistic/shotgun/vampire/doublebarrel,
 	/obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
 	/obj/item/gun/ballistic/automatic/darkpack/musket
-	),
+
 	//Ammunition for various weapons. No special or unique rounds like incendiaries.
-	CAT_AMMO = list(
+	var/list/conjured_ammo
 	/obj/item/ammo_box/darkpack/c9mm,
 	/obj/item/ammo_box/darkpack/c45acp,
 	/obj/item/ammo_box/darkpack/c44,
@@ -85,11 +86,10 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/ammo_box/magazine/glock45acp,
 	/obj/item/ammo_box/magazine/darkpack45acp,
 	/obj/item/ammo_box/magazine/m44
-	),
+
 	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
-	CAT_MISC = list(
-	),
-))
+	var/list/conjured_misc_items
+
 
 /datum/discipline_power/thaumaturgy/path/conjuring/activate()
 	. = ..()
@@ -115,7 +115,7 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 /datum/discipline_power/thaumaturgy/path/conjuring/one/activate()
 	. = ..()
 
-	chosen_object = switch(GLOB.conjuring_options[CAT_SIMPLE])
+	chosen_object = switch()
 
 	chosen_object = new
 	user.put_in_hands(chosen_object)
@@ -161,17 +161,7 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 /datum/discipline_power/thaumaturgy/path/conjuring/three/activate()
 	. = ..()
 
-	switch(GLOB.conjuring_options)
-		if(CAT_SIMPLE)
-			chosen_object = switch(GLOB.conjuring_options[CAT_SIMPLE])
-		if(CAT_MELEE)
-			chosen_object = switch(GLOB.conjuring_options[CAT_MELEE])
-		if(CAT_RANGED)
-			chosen_object = switch(GLOB.conjuring_options[CAT_RANGED])
-		if(CAT_AMMO)
-			chosen_object = switch(GLOB.conjuring_options[CAT_AMMO])
-		if(CAT_MISC)
-			chosen_object = switch(GLOB.conjuring_options[CAT_MISC])
+	switch()
 
 	chosen_object = new
 	user.put_in_hands(chosen_object)
