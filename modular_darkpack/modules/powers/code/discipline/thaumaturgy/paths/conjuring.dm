@@ -63,8 +63,27 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
 	/obj/item/gun/ballistic/automatic/darkpack/musket
 	),
-	//Ammunition for various weapons.
+	//Ammunition for various weapons. No special or unique rounds like incendiaries.
 	CAT_AMMO = list(
+	/obj/item/ammo_box/darkpack/c9mm,
+	/obj/item/ammo_box/darkpack/c45acp,
+	/obj/item/ammo_box/darkpack/c44,
+	/obj/item/ammo_box/darkpack/c556,
+	/obj/item/ammo_box/darkpack/c545,
+	/obj/item/ammo_box/darkpack/c12g,
+	/obj/item/ammo_box/darkpack/arrows,
+	/obj/item/ammo_box/darkpack/c50,
+	/obj/item/ammo_box/magazine/darkpackthompson,
+	/obj/item/ammo_box/magazine/darkpack545,
+	/obj/item/ammo_box/magazine/darkpack556,
+	/obj/item/ammo_box/magazine/darkpack556/hunt,
+	/obj/item/ammo_box/magazine/darkpack45smg,
+	/obj/item/ammo_box/magazine/darkpack9mp5,
+	/obj/item/ammo_box/magazine/darkpack9mm,
+	/obj/item/ammo_box/magazine/semi9mm,
+	/obj/item/ammo_box/magazine/glock45acp,
+	/obj/item/ammo_box/magazine/darkpack45acp,
+	/obj/item/ammo_box/magazine/m44
 	),
 	//Anything else which is mechanically or materially complex,  ut not a weapon. Lighters, etc.
 	CAT_MISC = list(
