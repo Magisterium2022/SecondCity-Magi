@@ -134,3 +134,8 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	grouped_powers = list(
 		/datum/discipline_power/thaumaturgy/path/conjuring/one
 	)
+
+/datum/discipline_power/thaumaturgy/path/conjuring/three/activate()
+	. = ..()
+	
+	
