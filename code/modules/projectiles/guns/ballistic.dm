@@ -147,6 +147,8 @@
 	/// Sound played when the burst mode is changed
 	var/burst_select_sound = SFX_FIRE_MODE_SWITCH
 	COOLDOWN_DECLARE(recoil_skill_check) // DARKPACK EDIT ADD
+	/// Checks firearms stat for conjuring checks.
+	conjure_ability_checked = /datum/st_stat/ability/firearms // DARKPACK EDIT ADD
 
 /obj/item/gun/ballistic/Initialize(mapload)
 	. = ..()
