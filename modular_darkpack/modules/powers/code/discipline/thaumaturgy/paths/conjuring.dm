@@ -13,13 +13,15 @@
 	var/roll_difficulty = 6 //Default difficulty.
 
 GLOBAL_LIST_INIT(conjuring_options, list(
-	CAT_SIMPLE = list(
+	//Materially simple objects. Anything which is just one material in a basic shape. 
+	CAT_SIMPLE = list( 
 	/obj/item/vampire_stake,
 	/obj/item/melee/baseball_bat/vamp,
 	/obj/item/melee/vamp/tire,
 	/obj/item/melee/baton/vamp,
 	/obj/item/melee/vamp/brick
 	),
+	//Materially and/or mechanically complex melee weapons. Effectively, anything which isn't a single piece of one material.
 	CAT_MELEE = list(
 	/obj/item/fireaxe/vamp,
 	/obj/item/katana/vamp,
@@ -37,8 +39,10 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/darkpack/spear,
 	/obj/item/instrument/eguitar/vamp
 	),
+	//Ranged weapons
 	CAT_RANGED = list(
 	),
+	//Anything else which is mechsnically or materially complex,  ut not a weapon. Lighters, etc.
 	CAT_MISC = list(
 	),
 ))
