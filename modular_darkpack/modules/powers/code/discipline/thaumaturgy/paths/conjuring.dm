@@ -18,74 +18,76 @@
 
 	// Materially simple objects. Anything which is just one material in a basic shape.
 	var/list/simple_conjured_items
-	/obj/item/vampire_stake,
-	/obj/item/melee/baseball_bat/vamp,
-	/obj/item/melee/vamp/tire,
-	/obj/item/melee/baton/vamp,
-	/obj/item/melee/vamp/brick
+
+	"Stake" = /obj/item/vampire_stake,
+	"Baseball Bat" = /obj/item/melee/baseball_bat/vamp,
+	"Tire Iron" = /obj/item/melee/vamp/tire,
+	"Baton" = /obj/item/melee/baton/vamp,
+	"Brick" = /obj/item/melee/vamp/brick
 
 	//Materially and/or mechanically complex melee weapons. Effectively, anything which isn't a single piece of one material.
 	var/list/conjured_melee_weapons
-	/obj/item/fireaxe/vamp,
-	/obj/item/katana/vamp,
-	/obj/item/fireaxe/vamp,
-	/obj/item/melee/sabre/rapier,
-	/obj/item/melee/sabre/vamp,
-	/obj/item/melee/sabre/rapier,
-	/obj/item/claymore/longsword,
-	/obj/item/knife/vamp,
-	/obj/item/melee/vamp/handsickle,
-	/obj/item/chainsaw/vamp,
-	/obj/item/shovel/vamp,
-	/obj/item/scythe/vamp,
-	/obj/item/switchblade/vamp,
-	/obj/item/darkpack/spear,
-	/obj/item/instrument/eguitar/vamp
+
+	"Fire Axe" = /obj/item/fireaxe/vamp,
+	"Katana" = /obj/item/katana/vamp,
+	"Rapier" = /obj/item/melee/sabre/rapier,
+	"Sabre" = /obj/item/melee/sabre/vamp,
+	"Longsword" = /obj/item/claymore/longsword,
+	"Knife" = /obj/item/knife/vamp,
+	"Sickle" = /obj/item/melee/vamp/handsickle,
+	"Chainsaw" = /obj/item/chainsaw/vamp,
+	"Shovel" = /obj/item/shovel/vamp,
+	"Scythe" = /obj/item/scythe/vamp,
+	"Switchblade" = /obj/item/switchblade/vamp,
+	"Spear" = /obj/item/darkpack/spear,
+	"Guitar" = /obj/item/instrument/eguitar/vamp
 
 	//Ranged weapons
 	var/list/conjured_ranged_weapons
-	/obj/item/gun/ballistic/revolver/darkpack/magnum,
-	/obj/item/gun/ballistic/revolver/darkpack/snub,
-	/obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
-	/obj/item/gun/ballistic/automatic/pistol/darkpack/m1911,
-	/obj/item/gun/ballistic/automatic/pistol/darkpack/glock19,
-	/obj/item/gun/ballistic/automatic/pistol/darkpack/glock21,
-	/obj/item/gun/ballistic/automatic/pistol/darkpack/beretta,
-	/obj/item/gun/ballistic/automatic/darkpack/uzi,
-	/obj/item/gun/ballistic/automatic/darkpack/mp5,
-	/obj/item/gun/ballistic/automatic/darkpack/mac10,
-	/obj/item/gun/ballistic/automatic/darkpack/ar15,
-	/obj/item/gun/ballistic/automatic/darkpack/huntrifle,
-	/obj/item/gun/ballistic/automatic/darkpack/ak74,
-	/obj/item/gun/ballistic/automatic/darkpack/thompson,
-	/obj/item/gun/ballistic/rifle/darkpack/lever,
-	/obj/item/gun/ballistic/automatic/darkpack/sniper,
-	/obj/item/gun/ballistic/shotgun/vampire,
-	/obj/item/gun/ballistic/shotgun/vampire/doublebarrel,
-	/obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
-	/obj/item/gun/ballistic/automatic/darkpack/musket
+
+	"Magnum Revolver" = /obj/item/gun/ballistic/revolver/darkpack/magnum,
+	"Snub Revolver" = /obj/item/gun/ballistic/revolver/darkpack/snub,
+	"Desert Eagle" = /obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
+	"M1911" = /obj/item/gun/ballistic/automatic/pistol/darkpack/m1911,
+	"Brokk 19" = /obj/item/gun/ballistic/automatic/pistol/darkpack/glock19,
+	"Brokk 21" = /obj/item/gun/ballistic/automatic/pistol/darkpack/glock21,
+	"Beretta" = /obj/item/gun/ballistic/automatic/pistol/darkpack/beretta,
+	"Uzi" = /obj/item/gun/ballistic/automatic/darkpack/uzi,
+	"MP5" = /obj/item/gun/ballistic/automatic/darkpack/mp5,
+	"MAC10" = /obj/item/gun/ballistic/automatic/darkpack/mac10,
+	"CAR-15" = /obj/item/gun/ballistic/automatic/darkpack/ar15,
+	"Hunting Rifle" = /obj/item/gun/ballistic/automatic/darkpack/huntrifle,
+	"AK-74" = /obj/item/gun/ballistic/automatic/darkpack/ak74,
+	"Thompson SMG" = /obj/item/gun/ballistic/automatic/darkpack/thompson,
+	"Lever-Action" = /obj/item/gun/ballistic/rifle/darkpack/lever,
+	"Sniper Rifle" = /obj/item/gun/ballistic/automatic/darkpack/sniper,
+	"Shotgun" = /obj/item/gun/ballistic/shotgun/vampire,
+	"Double Barrel Shotgun" = /obj/item/gun/ballistic/shotgun/vampire/doublebarrel,
+	"Crossbow" = /obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
+	"Musket" = /obj/item/gun/ballistic/automatic/darkpack/musket
 
 	//Ammunition for various weapons. No special or unique rounds like incendiaries.
 	var/list/conjured_ammo
-	/obj/item/ammo_box/darkpack/c9mm,
-	/obj/item/ammo_box/darkpack/c45acp,
-	/obj/item/ammo_box/darkpack/c44,
-	/obj/item/ammo_box/darkpack/c556,
-	/obj/item/ammo_box/darkpack/c545,
-	/obj/item/ammo_box/darkpack/c12g,
-	/obj/item/ammo_box/darkpack/arrows,
-	/obj/item/ammo_box/darkpack/c50,
-	/obj/item/ammo_box/magazine/darkpackthompson,
-	/obj/item/ammo_box/magazine/darkpack545,
-	/obj/item/ammo_box/magazine/darkpack556,
-	/obj/item/ammo_box/magazine/darkpack556/hunt,
-	/obj/item/ammo_box/magazine/darkpack45smg,
-	/obj/item/ammo_box/magazine/darkpack9mp5,
-	/obj/item/ammo_box/magazine/darkpack9mm,
-	/obj/item/ammo_box/magazine/semi9mm,
-	/obj/item/ammo_box/magazine/glock45acp,
-	/obj/item/ammo_box/magazine/darkpack45acp,
-	/obj/item/ammo_box/magazine/m44
+
+	"9mm Ammo Box" = /obj/item/ammo_box/darkpack/c9mm,
+	".45 ACP Ammo Box" = /obj/item/ammo_box/darkpack/c45acp,
+	".44 Ammo Box" = /obj/item/ammo_box/darkpack/c44,
+	"5.56mm Ammo Box" = /obj/item/ammo_box/darkpack/c556,
+	"5.45mm Ammo Box" = /obj/item/ammo_box/darkpack/c545,
+	"12g Ammo Box" = /obj/item/ammo_box/darkpack/c12g,
+	"Arrows Ammo Box" = /obj/item/ammo_box/darkpack/arrows,
+	".50 Ammo Box" = /obj/item/ammo_box/darkpack/c50,
+	"Thompson SMG Magazine" = /obj/item/ammo_box/magazine/darkpackthompson,
+	"5.45mm Magazine" = /obj/item/ammo_box/magazine/darkpack545,
+	"5.56mm Magazine" = /obj/item/ammo_box/magazine/darkpack556,
+	"5.56mm Hunting Rifle Magazine" = /obj/item/ammo_box/magazine/darkpack556/hunt,
+	".45 SMG Magazine" = /obj/item/ammo_box/magazine/darkpack45smg,
+	"9mm MP5 Magazine" = /obj/item/ammo_box/magazine/darkpack9mp5,
+	"9mm Magazine" = /obj/item/ammo_box/magazine/darkpack9mm,
+	"9mm Semi Automatic Magazine" = /obj/item/ammo_box/magazine/semi9mm,
+	".45 Brokk ACP Magazine" = /obj/item/ammo_box/magazine/glock45acp,
+	".45 ACP Magazine" = /obj/item/ammo_box/magazine/darkpack45acp,
+	".44 Magazine" = /obj/item/ammo_box/magazine/m44
 
 	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
 	var/list/conjured_misc_items
