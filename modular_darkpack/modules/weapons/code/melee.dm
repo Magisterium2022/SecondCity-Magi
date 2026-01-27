@@ -5,7 +5,7 @@
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	var/quieted = FALSE
 	custom_price = 1000
-
+	conjure_ability_checked = /datum/st_stat/ability/melee
 
 /obj/item/melee/vamp/Initialize(mapload)
 	. = ..()
@@ -295,7 +295,8 @@
 	righthand_file = 'modular_darkpack/modules/deprecated/icons/righthand.dmi'
 	worn_icon = 'modular_darkpack/modules/weapons/icons/worn_melee.dmi'
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
-	custom_price = 2000
+	custom_price = 200
+	conjure_ability_checked = /datum/st_stat/ability/crafts
 
 /obj/item/shovel/vamp
 	name = "shovel"
@@ -330,6 +331,7 @@
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	icon_state = "rock0"
 	inhand_icon_state = "rock0"
+	conjure_ability_checked = /datum/st_stat/ability/performance
 
 /obj/item/melee/baton/vamp
 	name = "police baton"
