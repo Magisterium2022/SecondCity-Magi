@@ -126,12 +126,16 @@
 			return
 		if(4)
 			chosen_object.name = "Odd [name]"
+			chosen_object.force *= 0.9
 		if(3)
 			chosen_object.name = "Damaged [name]"
+			chosen_object.force *= 0.8
 		if(2)
 			chosen_object.name = "Shoddy [name]"
+			chosen_object.force *= 0.7
 		if(1)
 			chosen_object.name = "Crude [name]"
+			chosen_object.force *= 0.6
 
 //PERMANENCY - Level 2
 /datum/discipline_power/thaumaturgy/path/conjuring/two
@@ -185,21 +189,25 @@
 			return
 		if(4)
 			chosen_object.name = "Odd [name]"
+			chosen_object.force *= 0.9
 			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 5
 		if(3)
 			chosen_object.name = "Damaged [name]"
+			chosen_object.force *= 0.8
 			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 10
 		if(2)
 			chosen_object.name = "Shoddy [name]"
+			chosen_object.force *= 0.7
 			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 15
 		if(1)
 			chosen_object.name = "Crude [name]"
+			chosen_object.force *= 0.6
 			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 20
