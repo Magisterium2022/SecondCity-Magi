@@ -94,3 +94,43 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	. = ..()
 	if(.)
 		return
+	copy_quality = success_count
+
+//SUMMON THE SIMPLE FORM - Level 1
+/datum/discipline_power/thaumaturgy/path/conjuring/one
+	name = "Summon the Simple Form"
+	desc = "Conjure a small item made out of a single material with no moving parts."
+
+	level = 1
+	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
+	violates_masquerade = TRUE
+	toggled = TRUE
+	duration_length = 1 SCENES
+
+	grouped_powers = list(
+		/datum/discipline_power/thaumaturgy/path/conjuring/three
+	)
+
+//PERMANENCY - Level 2
+/datum/discipline_power/thaumaturgy/path/conjuring/two
+	name = "Permanency"
+	desc = "Render a created item permanent."
+
+	level = 2
+	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
+	violates_masquerade = TRUE
+	toggled = FALSE
+
+//MAGIC OF THE SMITH - Level 3
+/datum/discipline_power/thaumaturgy/path/conjuring/three
+	name = "Magic of the Smith"
+	desc = "Conjure complex objects of multiple components and with moving parts."
+
+	level = 3
+	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
+	violates_masquerade = TRUE
+	toggled = FALSE
+
+	grouped_powers = list(
+		/datum/discipline_power/thaumaturgy/path/conjuring/one
+	)
