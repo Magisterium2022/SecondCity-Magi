@@ -12,6 +12,7 @@
 	var/checked_ability = null //Some summons, especially complex ones require additional abilities, to simulate familiarity rules.
 	var/roll_difficulty = 6 //Default difficulty.
 	var/copy_quality = 0 //The quality of the copy. <5 means there are defects, leading to reduced reliability.
+	var/chosen_object = null //The object which has been chosen to be conjured.
 
 GLOBAL_LIST_INIT(conjuring_options, list(
 	//Materially simple objects. Anything which is just one material in a basic shape. 
@@ -137,5 +138,6 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 
 /datum/discipline_power/thaumaturgy/path/conjuring/three/activate()
 	. = ..()
-	
+
+	chosen_object = switch(conjuring_options)
 	
