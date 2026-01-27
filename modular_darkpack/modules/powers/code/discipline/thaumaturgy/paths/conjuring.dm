@@ -11,6 +11,7 @@
 	effect_sound = ''
 	var/checked_ability = null //Some summons, especially complex ones require additional abilities, to simulate familiarity rules.
 	var/roll_difficulty = 6 //Default difficulty.
+	var/copy_quality = 0
 
 GLOBAL_LIST_INIT(conjuring_options, list(
 	//Materially simple objects. Anything which is just one material in a basic shape. 
@@ -41,6 +42,26 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	),
 	//Ranged weapons
 	CAT_RANGED = list(
+	/obj/item/gun/ballistic/revolver/darkpack/magnum,
+	/obj/item/gun/ballistic/revolver/darkpack/snub,
+	/obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
+	/obj/item/gun/ballistic/automatic/pistol/darkpack/m1911,
+	/obj/item/gun/ballistic/automatic/pistol/darkpack/glock19,
+	/obj/item/gun/ballistic/automatic/pistol/darkpack/glock21,
+	/obj/item/gun/ballistic/automatic/pistol/darkpack/beretta,
+	/obj/item/gun/ballistic/automatic/darkpack/uzi,
+	/obj/item/gun/ballistic/automatic/darkpack/mp5,
+	/obj/item/gun/ballistic/automatic/darkpack/mac10,
+	/obj/item/gun/ballistic/automatic/darkpack/ar15,
+	/obj/item/gun/ballistic/automatic/darkpack/huntrifle,
+	/obj/item/gun/ballistic/automatic/darkpack/ak74,
+	/obj/item/gun/ballistic/automatic/darkpack/thompson,
+	/obj/item/gun/ballistic/rifle/darkpack/lever,
+	/obj/item/gun/ballistic/automatic/darkpack/sniper,
+	/obj/item/gun/ballistic/shotgun/vampire,
+	/obj/item/gun/ballistic/shotgun/vampire/doublebarrel,
+	/obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
+	/obj/item/gun/ballistic/automatic/darkpack/musket
 	),
 	//Anything else which is mechsnically or materially complex,  ut not a weapon. Lighters, etc.
 	CAT_MISC = list(
