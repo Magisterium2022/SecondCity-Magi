@@ -17,8 +17,7 @@
 
 
 	// Materially simple objects. Anything which is just one material in a basic shape.
-	var/list/simple_conjured_items
-	simple_conjured_items = list(
+	var/list/simple_conjured_items = list(
 	"Stake" = /obj/item/vampire_stake,
 	"Baseball Bat" = /obj/item/melee/baseball_bat/vamp,
 	"Tire Iron" = /obj/item/melee/vamp/tire,
@@ -27,8 +26,7 @@
 	)
 
 	//Materially and/or mechanically complex melee weapons. Effectively, anything which isn't a single piece of one material.
-	var/list/conjured_melee_weapons
-	conjured_melee_weapons = list(
+	var/list/conjured_melee_weapons = list(
 	"Fire Axe" = /obj/item/fireaxe/vamp,
 	"Katana" = /obj/item/katana/vamp,
 	"Rapier" = /obj/item/melee/sabre/rapier,
@@ -45,8 +43,7 @@
 	)
 
 	//Ranged weapons
-	var/list/conjured_ranged_weapons
-	conjured_ranged_weapons = list(
+	var/list/conjured_ranged_weapons = list(
 	"Magnum Revolver" = /obj/item/gun/ballistic/revolver/darkpack/magnum,
 	"Snub Revolver" = /obj/item/gun/ballistic/revolver/darkpack/snub,
 	"Desert Eagle" = /obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
@@ -70,8 +67,7 @@
 	)
 
 	//Ammunition for various weapons. No special or unique rounds like incendiaries.
-	var/list/conjured_ammo
-	conjured_ammo = list(
+	var/list/conjured_ammo = list(
 	"9mm Ammo Box" = /obj/item/ammo_box/darkpack/c9mm,
 	".45 ACP Ammo Box" = /obj/item/ammo_box/darkpack/c45acp,
 	".44 Ammo Box" = /obj/item/ammo_box/darkpack/c44,
@@ -121,9 +117,7 @@
 
 /datum/discipline_power/thaumaturgy/path/conjuring/one/activate()
 	. = ..()
-
-	chosen_object = switch()
-
+	chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
 	chosen_object = new
 	user.put_in_hands(chosen_object)
 
@@ -168,8 +162,22 @@
 /datum/discipline_power/thaumaturgy/path/conjuring/three/activate()
 	. = ..()
 
-	switch()
-
+	var/list/conjuring_choices = list("Simple Items", "Melee Weapons", "Ranged Weapons", "Ammo", "Misc Items")
+	var/conjuring_category = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
+	switch(conjuring_category)
+		if("Simple Items")
+			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
+		if("Melee Weapons")
+			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_melee_weapons)
+		if("Ranged Weapons")
+			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_ranged_weapons)
+		if("Ammo")
+			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_ammo)
+		if("Misc items")
+			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_misc_items)
+		else
+			display_results(user, span_notice("Something has gone wrong in the list of conjuring item categories, probably a misspelled entry, let a coder know."))
+			return
 	chosen_object = new
 	user.put_in_hands(chosen_object)
 	switch(copy_quality)
