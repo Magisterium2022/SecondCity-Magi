@@ -141,6 +141,7 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
 	violates_masquerade = TRUE
 	toggled = FALSE
+	vitae_cost = 3
 
 //MAGIC OF THE SMITH - Level 3
 /datum/discipline_power/thaumaturgy/path/conjuring/three
@@ -151,6 +152,7 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
 	violates_masquerade = TRUE
 	toggled = FALSE
+	vitae_cost = 5
 
 	grouped_powers = list(
 		/datum/discipline_power/thaumaturgy/path/conjuring/one
