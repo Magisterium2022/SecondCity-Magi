@@ -63,7 +63,10 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
 	/obj/item/gun/ballistic/automatic/darkpack/musket
 	),
-	//Anything else which is mechsnically or materially complex,  ut not a weapon. Lighters, etc.
+	//Ammunition for various weapons.
+	CAT_AMMO = list(
+	),
+	//Anything else which is mechanically or materially complex,  ut not a weapon. Lighters, etc.
 	CAT_MISC = list(
 	),
 ))
