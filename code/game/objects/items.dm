@@ -238,6 +238,11 @@
 	/// Do we apply a click cooldown when resisting this object if it is restraining them?
 	var/resist_cooldown = CLICK_CD_BREAKOUT
 
+	/// What's the additional ability checked, if any, when conjuring an item?
+	var/conjure_ability_checked = null
+	/// What's the base difficulty of the conjure roll for this object? 6 by default.
+	var/conjure_difficulty = 6
+
 /obj/item/Initialize(mapload)
 	if(attack_verb_continuous)
 		attack_verb_continuous = string_list(attack_verb_continuous)
