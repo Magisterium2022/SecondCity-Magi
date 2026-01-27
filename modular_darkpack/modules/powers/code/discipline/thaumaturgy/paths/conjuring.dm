@@ -115,7 +115,18 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 /datum/discipline_power/thaumaturgy/path/conjuring/one/activate()
 	. = ..()
 
-	chosen_object = switch(GLOB.conjuring_options.CAT_SIMPLE)
+	chosen_object = switch(GLOB.conjuring_options[CAT_SIMPLE])
+	switch(copy_quality)
+		if(>=5)
+			return
+		if(4)
+			chosen_item name = 
+		if(3)
+
+		if(2)
+
+		if(1)
+
 
 //PERMANENCY - Level 2
 /datum/discipline_power/thaumaturgy/path/conjuring/two
