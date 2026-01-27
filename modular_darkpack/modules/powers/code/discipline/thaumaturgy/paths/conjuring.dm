@@ -147,7 +147,7 @@
 //MAGIC OF THE SMITH - Level 3
 /datum/discipline_power/thaumaturgy/path/conjuring/three
 	name = "Magic of the Smith"
-	desc = "Conjure complex objects of multiple components and with moving parts."
+	desc = "Conjure permanent complex objects of multiple components and with moving parts."
 
 	level = 3
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
