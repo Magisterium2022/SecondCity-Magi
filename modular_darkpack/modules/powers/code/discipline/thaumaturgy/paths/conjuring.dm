@@ -86,7 +86,7 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/ammo_box/magazine/darkpack45acp,
 	/obj/item/ammo_box/magazine/m44
 	),
-	//Anything else which is mechanically or materially complex,  ut not a weapon. Lighters, etc.
+	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
 	CAT_MISC = list(
 	),
 ))
@@ -116,17 +116,21 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	. = ..()
 
 	chosen_object = switch(GLOB.conjuring_options[CAT_SIMPLE])
+
+	chosen_object = new
+	user.put_in_hands(chosen_object)
+
 	switch(copy_quality)
 		if(>=5)
 			return
 		if(4)
-			chosen_item.name = "Odd [name]"
+			chosen_object.name = "Odd [name]"
 		if(3)
-			chosen_item.name = "Damaged [name]"
+			chosen_object.name = "Damaged [name]"
 		if(2)
-			chosen_item.name = "Shoddy [name]"
+			chosen_object.name = "Shoddy [name]"
 		if(1)
-			chosen_item.name = "Crude [name]"
+			chosen_object.name = "Crude [name]"
 
 //PERMANENCY - Level 2
 /datum/discipline_power/thaumaturgy/path/conjuring/two
@@ -155,33 +159,40 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 /datum/discipline_power/thaumaturgy/path/conjuring/three/activate()
 	. = ..()
 
-	chosen_object = switch(GLOB.conjuring_options)
+	switch(GLOB.conjuring_options)
 		if(CAT_SIMPLE)
+			chosen_object = switch(GLOB.conjuring_options[CAT_SIMPLE])
 		if(CAT_MELEE)
+			chosen_object = switch(GLOB.conjuring_options[CAT_MELEE])
 		if(CAT_RANGED)
+			chosen_object = switch(GLOB.conjuring_options[CAT_RANGED])
 		if(CAT_AMMO)
+			chosen_object = switch(GLOB.conjuring_options[CAT_AMMO])
 		if(CAT_MISC)
+			chosen_object = switch(GLOB.conjuring_options[CAT_MISC])
 
+	chosen_object = new
+	user.put_in_hands(chosen_object)
 	switch(copy_quality)
 		if(>=5)
 			return
 		if(4)
-			chosen_item.name = "Odd [name]"
+			chosen_object.name = "Odd [name]"
 			for(/obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 5
 		if(3)
-			chosen_item.name = "Damaged [name]"
+			chosen_object.name = "Damaged [name]"
 			for(/obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 10
 		if(2)
-			chosen_item.name = "Shoddy [name]"
+			chosen_object.name = "Shoddy [name]"
 			for(/obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 15
 		if(1)
-			chosen_item.name = "Crude [name]"
+			chosen_object.name = "Crude [name]"
 			for(/obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 20
