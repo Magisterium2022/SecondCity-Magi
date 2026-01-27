@@ -11,7 +11,7 @@
 	effect_sound = ''
 	var/checked_ability = null //Some summons, especially complex ones require additional abilities, to simulate familiarity rules.
 	var/roll_difficulty = 6 //Default difficulty.
-	var/copy_quality = 0
+	var/copy_quality = 0 //The quality of the copy. <5 means there are defects, leading to reduced reliability.
 
 GLOBAL_LIST_INIT(conjuring_options, list(
 	//Materially simple objects. Anything which is just one material in a basic shape. 
@@ -89,3 +89,8 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	CAT_MISC = list(
 	),
 ))
+
+/datum/discipline_power/thaumaturgy/path/conjuring/activate()
+	. = ..()
+	if(.)
+		return
