@@ -21,6 +21,21 @@ GLOBAL_LIST_INIT(conjuring_options, list(
 	/obj/item/melee/vamp/brick
 	),
 	CAT_MELEE = list(
+	/obj/item/fireaxe/vamp,
+	/obj/item/katana/vamp,
+	/obj/item/fireaxe/vamp,
+	/obj/item/melee/sabre/rapier,
+	/obj/item/melee/sabre/vamp,
+	/obj/item/melee/sabre/rapier,
+	/obj/item/claymore/longsword,
+	/obj/item/knife/vamp,
+	/obj/item/melee/vamp/handsickle,
+	/obj/item/chainsaw/vamp,
+	/obj/item/shovel/vamp,
+	/obj/item/scythe/vamp,
+	/obj/item/switchblade/vamp,
+	/obj/item/darkpack/spear,
+	/obj/item/instrument/eguitar/vamp
 	),
 	CAT_RANGED = list(
 	),
