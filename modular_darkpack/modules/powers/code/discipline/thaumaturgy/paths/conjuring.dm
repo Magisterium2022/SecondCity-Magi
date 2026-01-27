@@ -18,16 +18,17 @@
 
 	// Materially simple objects. Anything which is just one material in a basic shape.
 	var/list/simple_conjured_items
-
+	simple_conjured_items = list(
 	"Stake" = /obj/item/vampire_stake,
 	"Baseball Bat" = /obj/item/melee/baseball_bat/vamp,
 	"Tire Iron" = /obj/item/melee/vamp/tire,
 	"Baton" = /obj/item/melee/baton/vamp,
 	"Brick" = /obj/item/melee/vamp/brick
+	)
 
 	//Materially and/or mechanically complex melee weapons. Effectively, anything which isn't a single piece of one material.
 	var/list/conjured_melee_weapons
-
+	conjured_melee_weapons = list(
 	"Fire Axe" = /obj/item/fireaxe/vamp,
 	"Katana" = /obj/item/katana/vamp,
 	"Rapier" = /obj/item/melee/sabre/rapier,
@@ -41,10 +42,11 @@
 	"Switchblade" = /obj/item/switchblade/vamp,
 	"Spear" = /obj/item/darkpack/spear,
 	"Guitar" = /obj/item/instrument/eguitar/vamp
+	)
 
 	//Ranged weapons
 	var/list/conjured_ranged_weapons
-
+	conjured_ranged_weapons = list(
 	"Magnum Revolver" = /obj/item/gun/ballistic/revolver/darkpack/magnum,
 	"Snub Revolver" = /obj/item/gun/ballistic/revolver/darkpack/snub,
 	"Desert Eagle" = /obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
@@ -65,10 +67,11 @@
 	"Double Barrel Shotgun" = /obj/item/gun/ballistic/shotgun/vampire/doublebarrel,
 	"Crossbow" = /obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
 	"Musket" = /obj/item/gun/ballistic/automatic/darkpack/musket
+	)
 
 	//Ammunition for various weapons. No special or unique rounds like incendiaries.
 	var/list/conjured_ammo
-
+	conjured_ammo = list(
 	"9mm Ammo Box" = /obj/item/ammo_box/darkpack/c9mm,
 	".45 ACP Ammo Box" = /obj/item/ammo_box/darkpack/c45acp,
 	".44 Ammo Box" = /obj/item/ammo_box/darkpack/c44,
@@ -88,10 +91,12 @@
 	".45 Brokk ACP Magazine" = /obj/item/ammo_box/magazine/glock45acp,
 	".45 ACP Magazine" = /obj/item/ammo_box/magazine/darkpack45acp,
 	".44 Magazine" = /obj/item/ammo_box/magazine/m44
+	)
 
 	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
 	var/list/conjured_misc_items
-
+	conjured_misc_items = list(
+	)
 
 /datum/discipline_power/thaumaturgy/path/conjuring/activate()
 	. = ..()
