@@ -185,21 +185,21 @@
 			return
 		if(4)
 			chosen_object.name = "Odd [name]"
-			for(/obj/item/gun/ballistic)
+			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 5
 		if(3)
 			chosen_object.name = "Damaged [name]"
-			for(/obj/item/gun/ballistic)
+			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 10
 		if(2)
 			chosen_object.name = "Shoddy [name]"
-			for(/obj/item/gun/ballistic)
+			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 15
 		if(1)
 			chosen_object.name = "Crude [name]"
-			for(/obj/item/gun/ballistic)
+			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 20
