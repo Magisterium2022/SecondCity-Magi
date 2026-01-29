@@ -22,6 +22,7 @@
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	pixel_w = -8
 	custom_price = 1800
+	conjure_ability_minimum = 1
 
 /obj/item/katana/vamp
 	name = "katana"
@@ -32,6 +33,8 @@
 	worn_icon = 'modular_darkpack/modules/weapons/icons/worn_melee.dmi'
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	pixel_w = -8
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/katana/vamp/Initialize(mapload)
 	. = ..()
@@ -87,6 +90,8 @@
 	worn_icon = 'modular_darkpack/modules/weapons/icons/worn_melee.dmi'
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	icon_state = "rapier"
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 
 /obj/item/melee/sabre/rapier/Initialize(mapload)
@@ -107,6 +112,7 @@
 	pixel_w = -8
 	masquerade_violating = FALSE
 	custom_price = 500
+	conjure_ability_minimum = 1
 
 /obj/item/claymore/machete/Initialize(mapload)
 	. = ..()
@@ -122,6 +128,8 @@
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	icon_state = "sabre"
 	var/value = 1000 // DARKPACK TODO: Move this up at some point. I hate the selling component with all my heart.
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/melee/sabre/vamp/Initialize(mapload)
 	. = ..()
@@ -142,7 +150,8 @@
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	icon_state = "longsword"
 	inhand_icon_state = "longsword"
-
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/claymore/longsword/Initialize(mapload)
 	. = ..()
@@ -297,6 +306,8 @@
 	ONFLOOR_ICON_HELPER('modular_darkpack/modules/weapons/icons/weapons_onfloor.dmi')
 	custom_price = 200
 	conjure_ability_checked = /datum/st_stat/ability/crafts
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/shovel/vamp
 	name = "shovel"
@@ -332,6 +343,8 @@
 	icon_state = "rock0"
 	inhand_icon_state = "rock0"
 	conjure_ability_checked = /datum/st_stat/ability/performance
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/melee/baton/vamp
 	name = "police baton"
