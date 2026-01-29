@@ -42,14 +42,13 @@
 	"Guitar" = /obj/item/instrument/eguitar/vamp
 	)
 
-	//Ranged weapons
+	//Ranged weapons. Use generic ones, not faction/unique weapons where possible.
 	var/list/conjured_ranged_weapons = list(
 	"Magnum Revolver" = /obj/item/gun/ballistic/revolver/darkpack/magnum,
 	"Snub Revolver" = /obj/item/gun/ballistic/revolver/darkpack/snub,
 	"Desert Eagle" = /obj/item/gun/ballistic/automatic/pistol/darkpack/deagle,
 	"M1911" = /obj/item/gun/ballistic/automatic/pistol/darkpack/m1911,
 	"Brokk 19" = /obj/item/gun/ballistic/automatic/pistol/darkpack/glock19,
-	"Brokk 21" = /obj/item/gun/ballistic/automatic/pistol/darkpack/glock21,
 	"Beretta" = /obj/item/gun/ballistic/automatic/pistol/darkpack/beretta,
 	"Uzi" = /obj/item/gun/ballistic/automatic/darkpack/uzi,
 	"MP5" = /obj/item/gun/ballistic/automatic/darkpack/mp5,
@@ -86,7 +85,8 @@
 	"9mm Semi Automatic Magazine" = /obj/item/ammo_box/magazine/semi9mm,
 	".45 Brokk ACP Magazine" = /obj/item/ammo_box/magazine/glock45acp,
 	".45 ACP Magazine" = /obj/item/ammo_box/magazine/darkpack45acp,
-	".44 Magazine" = /obj/item/ammo_box/magazine/m44
+	".44 Magazine" = /obj/item/ammo_box/magazine/m44,
+	"Musket Shot" = /obj/item/ammo_casing/vampire/c75
 	)
 
 	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
