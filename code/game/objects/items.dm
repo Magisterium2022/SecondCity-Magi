@@ -242,6 +242,8 @@
 	var/conjure_ability_checked = null
 	/// What's the base difficulty of the conjure roll for this object? 6 by default.
 	var/conjure_difficulty = 6
+	/// What's the minimum ability to be able to roll to conjure it? Increases with item complexity.
+	var/conjure_ability_minimum = 0
 
 /obj/item/Initialize(mapload)
 	if(attack_verb_continuous)
