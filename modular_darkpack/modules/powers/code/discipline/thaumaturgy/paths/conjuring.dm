@@ -104,8 +104,7 @@
 	level = 1
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_CONSCIOUS
 	violates_masquerade = TRUE
-	toggled = TRUE
-	duration_length = 1 SCENES
+	toggled = FALSE 
 
 	grouped_powers = list(
 		/datum/discipline_power/thaumaturgy/path/conjuring/three
@@ -116,7 +115,7 @@
 	chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
 	chosen_object = new
 	user.put_in_hands(chosen_object)
-
+	addtimer(CALLBACK(src, PROC_REF(object_willpower_cost)), 1 SCENES) //RAW is one turn, but you can't do anything in that, and this is a small, single item.
 	switch(copy_quality)
 		if(4)
 			chosen_object.name = "Odd [name]"
@@ -215,3 +214,11 @@
 			if(chosen_object = /obj/item/gun/ballistic)
 				can_misfire = TRUE
 				misfire_probability += 20
+
+/datum/discipline_power/thaumaturgy/path/conjuring/proc/(object_willpower_cost)
+	willpower_object_sustain = tgui_input_list(user, "Do you want to sustain [conjured_object]? It will cost one willpower.", "Conjuration", "Yes", "No")
+	switch(willpower_object_sustain)
+		if("Yes"
+		if("No"
+		else
+		
