@@ -9,8 +9,6 @@
 	desc = "Path of Conjuring Power Description"
 
 	effect_sound = ''
-	var/checked_ability = null //Some summons, especially complex ones require additional abilities, to simulate familiarity rules.
-	var/roll_difficulty = 6 //Default difficulty.
 	var/copy_quality = 0 //The quality of the copy. <5 means there are defects, leading to reduced reliability.
 	var/chosen_object = null //The object which has been chosen to be conjured.
 
@@ -96,8 +94,6 @@
 
 /datum/discipline_power/thaumaturgy/path/conjuring/activate()
 	. = ..()
-	if(.)
-		return
 	copy_quality = success_count
 
 //SUMMON THE SIMPLE FORM - Level 1
@@ -122,8 +118,6 @@
 	user.put_in_hands(chosen_object)
 
 	switch(copy_quality)
-		if(>=5)
-			return
 		if(4)
 			chosen_object.name = "Odd [name]"
 			chosen_object.force *= 0.9
@@ -182,11 +176,15 @@
 		else
 			display_results(user, span_notice("Something has gone wrong in the list of conjuring item categories, probably a misspelled entry, let a coder know."))
 			return
+
+	if(!chosen_object.conjure_ability_checked = null) 
+			if(storyteller
+			ability_check = SSroll.storyteller_roll(dice = owner.st_get_stat(chosen_object.conjure_ability_checked), difficulty = (chosen_object.conjure_difficulty), numerical = TRUE, mobs_to_show_output = owner)
+	if(ability_check <= 0)
+		
 	chosen_object = new
 	user.put_in_hands(chosen_object)
 	switch(copy_quality)
-		if(>=5)
-			return
 		if(4)
 			chosen_object.name = "Odd [name]"
 			chosen_object.force *= 0.9
