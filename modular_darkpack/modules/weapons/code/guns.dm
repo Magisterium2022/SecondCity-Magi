@@ -41,6 +41,8 @@
 /obj/item/gun/ballistic/revolver/darkpack/magnum
 	name = "magnum revolver"
 	desc = "Feelin' lucky, punk?"
+	conjure_difficulty = 7
+	conjure_ability_minimum = 1
 
 /obj/item/gun/ballistic/revolver/darkpack/snub
 	name = "snub-nosed revolver"
@@ -89,6 +91,8 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m44
 	recoil = 3
 	fire_sound = 'modular_darkpack/modules/weapons/sounds/deagle.ogg'
+	conjure_difficulty = 8
+	conjure_ability_minimum = 3
 
 /obj/item/ammo_box/magazine/m50
 	name = "handgun magazine (.50)"
@@ -127,6 +131,8 @@
 	fire_sound = 'modular_darkpack/modules/weapons/sounds/m1911.ogg'
 	vary_fire_sound = FALSE
 	fire_sound_volume = 100
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/ammo_box/magazine/glock9mm
 	name = "automatic pistol magazine (9mm)"
@@ -151,6 +157,8 @@
 	bolt_type = BOLT_TYPE_LOCKING
 	fire_sound = 'modular_darkpack/modules/weapons/sounds/glock.ogg'
 	fire_sound_volume = 100
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/ammo_box/magazine/glock45acp
 	name = "automatic pistol magazine (.45 ACP)"
@@ -191,6 +199,8 @@
 	fire_sound = 'modular_darkpack/modules/weapons/sounds/glock.ogg'
 	fire_sound_volume = 75
 	custom_price = 1200
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/gun/ballistic/automatic/pistol/darkpack/beretta/toreador
 	name = "\improper Sword Series S 9mm"
@@ -239,6 +249,8 @@
 	mag_display = TRUE
 	rack_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
 	fire_sound = 'modular_darkpack/modules/deprecated/sounds/uzi.ogg'
+	conjure_difficulty = 8
+	conjure_ability_minimum = 3
 
 /obj/item/ammo_box/magazine/darkpack9mp5
 	name = "mp5 magazine (9mm)"
@@ -266,6 +278,8 @@
 	mag_display = TRUE
 	rack_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
 	fire_sound = 'modular_darkpack/modules/deprecated/sounds/mp5.ogg'
+	conjure_difficulty = 8
+	conjure_ability_minimum = 3
 
 /obj/item/ammo_box/magazine/darkpack45smg
 	name = ".45 SMG magazine"
@@ -396,6 +410,8 @@
 	mag_display = TRUE
 	fire_sound = 'modular_darkpack/modules/deprecated/sounds/rifle.ogg'
 	masquerade_violating = TRUE
+	conjure_difficulty = 9
+	conjure_ability_minimum = 4
 
 /obj/item/gun/ballistic/automatic/darkpack/huntrifle
 	name = "hunting rifle"
@@ -418,6 +434,8 @@
 	fire_sound = 'modular_darkpack/modules/deprecated/sounds/rifle.ogg'
 	masquerade_violating = FALSE
 	custom_price = 2000
+	conjure_difficulty = 8
+	conjure_ability_minimum = 3
 
 /obj/item/ammo_box/magazine/darkpack545
 	name = "rifle magazine (5.45mm)"
@@ -449,6 +467,8 @@
 	mag_display = TRUE
 	fire_sound = 'modular_darkpack/modules/deprecated/sounds/ak.ogg'
 	masquerade_violating = TRUE
+	conjure_difficulty = 9
+	conjure_ability_minimum = 4
 
 /obj/item/ammo_box/magazine/darkpackaug
 	name = "AUG magazine (5.56mm)"
@@ -509,6 +529,8 @@
 	mag_display = TRUE
 	fire_sound = 'modular_darkpack/modules/deprecated/sounds/thompson.ogg'
 	masquerade_violating = TRUE
+	conjure_difficulty = 8
+	conjure_ability_minimum = 3
 
 /obj/item/ammo_box/magazine/internal/darkpack/lever
 	name = "lever action internal magazine"
@@ -546,6 +568,8 @@
 	slot_flags = ITEM_SLOT_BACK
 	projectile_damage_multiplier = 1.5 //~52 damage vs 35 base .44 damage. It's ok, on par with 5.56 but lower pen and slower to fire due to bolt action.
 	masquerade_violating = FALSE
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/ammo_box/magazine/internal/vampire/sniper
 	name = "sniper rifle internal magazine"
@@ -586,6 +610,8 @@
 	projectile_damage_multiplier = 2 //140 damage. Nice.
 	actions_types = list()
 	masquerade_violating = TRUE
+	conjure_difficulty = 9
+	conjure_ability_minimum = 5
 
 
 /obj/item/gun/ballistic/automatic/darkpack/autosniper //just a test, do not spawn
@@ -648,6 +674,8 @@
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
 	custom_price = 1000
+	conjure_difficulty = 7
+	conjure_ability_minimum = 2
 
 /obj/item/ammo_box/magazine/internal/darkpack_dbarrel
 	name = "double barrel internal magazine"
@@ -739,6 +767,7 @@
 	inhand_y_dimension = 32
 	masquerade_violating = FALSE
 	obj_flags = NONE
+	conjure_ability_minimum = 1
 
 /obj/item/ammo_box/magazine/internal/vampcrossbow
 	ammo_type = /obj/item/ammo_casing/vampire/bolt
@@ -774,6 +803,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	projectile_damage_multiplier = 1.5 //150 damage; it is a single-shot.
 	actions_types = list()
+	conjure_ability_minimum = 1
 
 /obj/item/gun/ballistic/automatic/darkpack/musket/process_fire(mob/living/user)
 	..()
