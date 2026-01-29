@@ -227,13 +227,14 @@
 	willpower_object_sustain = tgui_input_list(owner, "Do you want to sustain [chosen_object]? It will cost one willpower.", "Conjuration", "Yes", "No")
 	switch(willpower_object_sustain)
 		if("Yes")
-			if(user.st_get_stat(STAT_TEMPORARY_WILLPOWER) <= 0)
+			if(owner.st_get_stat(STAT_TEMPORARY_WILLPOWER) <= 0)
 				to_chat(owner, span_warning("You don't have any temporary willpower left to sustainn[chosen_object]!"))
 				return FALSE
+			owner.st_set_stat(STAT_TEMPORARY_WILLPOWER, max((owner.st_get_stat(STAT_TEMPORARY_WILLPOWER) - 1),0))
 			addtimer(CALLBACK(src, PROC_REF(object_willpower_cost) chosen_object, user), 1 SCENES)
 		if("No")
 			to_chat(owner, span_warning("You allow the [chosen_object.name] to disspear into nothingness!"))
 			qdel(chosen_object)
 		else
-			to_chat(owner, span_warning("You allow the [chosen_object.name] to disspear into nothingness!"))
+			to_chat(owner, span_warning("You lose focus and allow the [chosen_object.name] to disspear into nothingness! It looks like a non-standard exit has occured, let a coder know if you got this by accident"))
 			qdel(chosen_object)
