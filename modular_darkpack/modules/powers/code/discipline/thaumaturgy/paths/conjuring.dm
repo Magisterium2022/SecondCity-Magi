@@ -115,7 +115,7 @@
 	chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
 	chosen_object = new
 	user.put_in_hands(chosen_object)
-	addtimer(CALLBACK(src, PROC_REF(object_willpower_cost)), 1 SCENES) //RAW is one turn, but you can't do anything in that, and this is a small, single item.
+	addtimer(CALLBACK(src, PROC_REF(object_willpower_cost) conjured_object, user), 1 SCENES) //RAW is one turn, but you can't do anything in that, and this is a small, single item.
 	switch(copy_quality)
 		if(4)
 			chosen_object.name = "Odd [name]"
@@ -215,7 +215,7 @@
 				can_misfire = TRUE
 				misfire_probability += 20
 
-/datum/discipline_power/thaumaturgy/path/conjuring/proc/(object_willpower_cost)
+/datum/discipline_power/thaumaturgy/path/conjuring/proc/object_willpower_cost(conjured_object, user)
 	willpower_object_sustain = tgui_input_list(user, "Do you want to sustain [conjured_object]? It will cost one willpower.", "Conjuration", "Yes", "No")
 	switch(willpower_object_sustain)
 		if("Yes"
