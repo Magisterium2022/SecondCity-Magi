@@ -90,32 +90,41 @@
 	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
 	var/list/conjured_misc_items
 	conjured_misc_items = list(
-	"Fire Extinguisher"
-	"Lighter"
-	"Cigar"
-	"Cigarettes"
-	"Torch"
-	"Pipe"
-	"Matches"
-	"Pen"
-	"Paper"
-	"Spray Can"
-	"Phone"
-	"Lockpick"
-	"Gloves"
-	"Camera"
-	"Camera Film"
-	"Tape Recorder"
-	"Screwdriver"
-	"Wirecutters"
-	"Glasses"
-	"Sunglasses"
-	"Yellow Sunglasses"
-	"Red Sunglasses"
-	
-	
-	
-	
+	"Fire Extinguisher" = 
+	"Lighter" = 
+	"Cigar" = 
+	"Cigarettes" = 
+	"Torch" = 
+	"Pipe" = 
+	"Matches" = 
+	"Pen" = 
+	"Paper" = 
+	"Spray Can" = 
+	"Phone" = 
+	"Lockpick" = 
+	"Gloves" = 
+	"Camera" = 
+	"Camera Film" = 
+	"Tape Recorder" = 
+	"Screwdriver" = 
+	"Wirecutters" = 
+	"Glasses" = 
+	"Sunglasses" = 
+	"Yellow Sunglasses" = 
+	"Red Sunglasses" = 
+	"Magister Robes" = 
+	"Tremere Robes" = 
+	"Red Robes" = 
+	"Blue Robes" = 
+	"Green Robes" = 
+	"Dark Red Robes" = 
+	"White Robes" = 
+	"Black Robes" = 
+	"Grey Robes" = 
+	"Balaclava" = 
+	"Comedy Mask" = 
+	"Tragedy Mask" = 
+	"Venetian Mask" = 
 	)
 
 /datum/discipline_power/thaumaturgy/path/conjuring/activate()
