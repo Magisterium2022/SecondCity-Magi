@@ -112,10 +112,10 @@
 
 /datum/discipline_power/thaumaturgy/path/conjuring/one/activate()
 	. = ..()
-	chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
+	chosen_object = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
 	chosen_object = new
-	user.put_in_hands(chosen_object)
-	addtimer(CALLBACK(src, PROC_REF(object_willpower_cost) chosen_object, user), 1 SCENES) //RAW is one turn, but you can't do anything in that, and this is a small, single item.
+	owner.put_in_hands(chosen_object)
+	addtimer(CALLBACK(src, PROC_REF(object_willpower_cost) chosen_object, owner), 1 SCENES) //RAW is one turn, but you can't do anything in that, and this is a small, single item.
 	switch(copy_quality)
 		if(4)
 			chosen_object.name = "Odd [name]"
@@ -160,20 +160,20 @@
 	. = ..()
 
 	var/list/conjuring_choices = list("Simple Items", "Melee Weapons", "Ranged Weapons", "Ammo", "Misc Items")
-	var/conjuring_category = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
+	var/conjuring_category = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
 	switch(conjuring_category)
 		if("Simple Items")
-			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
+			chosen_object = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", simple_conjured_items)
 		if("Melee Weapons")
-			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_melee_weapons)
+			chosen_object = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", conjured_melee_weapons)
 		if("Ranged Weapons")
-			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_ranged_weapons)
+			chosen_object = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", conjured_ranged_weapons)
 		if("Ammo")
-			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_ammo)
+			chosen_object = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", conjured_ammo)
 		if("Misc items")
-			chosen_object = tgui_input_list(user, "What do you wish to conjure?", "Conjuration", conjured_misc_items)
+			chosen_object = tgui_input_list(owner, "What do you wish to conjure?", "Conjuration", conjured_misc_items)
 		else
-			display_results(user, span_notice("Something has gone wrong in the list of conjuring item categories, probably a misspelled entry, let a coder know."))
+			display_results(owner, span_notice("Something has gone wrong in the list of conjuring item categories, probably a misspelled entry, let a coder know."))
 			return
 
 	if(!chosen_object.conjure_ability_checked = null) 
@@ -188,7 +188,7 @@
 			return
 
 	chosen_object = new
-	user.put_in_hands(chosen_object)
+	owner.put_in_hands(chosen_object)
 	switch(copy_quality)
 		if(4)
 			chosen_object.name = "Odd [name]"
@@ -215,8 +215,8 @@
 				can_misfire = TRUE
 				misfire_probability += 20
 
-/datum/discipline_power/thaumaturgy/path/conjuring/proc/object_willpower_cost(chosen_object, user)
-	willpower_object_sustain = tgui_input_list(user, "Do you want to sustain [chosen_object]? It will cost one willpower.", "Conjuration", "Yes", "No")
+/datum/discipline_power/thaumaturgy/path/conjuring/proc/object_willpower_cost(obj/item/chosen_object, mob/living/carbon/human/owner)
+	willpower_object_sustain = tgui_input_list(owner, "Do you want to sustain [chosen_object]? It will cost one willpower.", "Conjuration", "Yes", "No")
 	switch(willpower_object_sustain)
 		if("Yes")
 			
