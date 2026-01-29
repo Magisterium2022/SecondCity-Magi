@@ -228,7 +228,8 @@
 	switch(willpower_object_sustain)
 		if("Yes")
 			if(owner.st_get_stat(STAT_TEMPORARY_WILLPOWER) <= 0)
-				to_chat(owner, span_warning("You don't have any temporary willpower left to sustainn[chosen_object]!"))
+				to_chat(owner, span_warning("You don't have any temporary willpower left to sustain[chosen_object]!"))
+				qdel(chosen_object)
 				return FALSE
 			owner.st_set_stat(STAT_TEMPORARY_WILLPOWER, max((owner.st_get_stat(STAT_TEMPORARY_WILLPOWER) - 1),0))
 			addtimer(CALLBACK(src, PROC_REF(object_willpower_cost) chosen_object, user), 1 SCENES)
