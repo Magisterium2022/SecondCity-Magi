@@ -178,10 +178,16 @@
 			return
 
 	if(!chosen_object.conjure_ability_checked = null) 
-			if(storyteller
-			ability_check = SSroll.storyteller_roll(dice = owner.st_get_stat(chosen_object.conjure_ability_checked), difficulty = (chosen_object.conjure_difficulty), numerical = TRUE, mobs_to_show_output = owner)
-	if(ability_check <= 0)
-		
+			ability_check = owner.st_get_stat(chosen_object.conjure_ability_checked)
+			ability_check_roll = SSroll.storyteller_roll(dice = owner.st_get_stat(chosen_object.conjure_ability_checked), difficulty = (chosen_object.conjure_difficulty), numerical = TRUE, mobs_to_show_output = owner)
+		if(ability_check < chosen_object.conjure_ability_minimum)
+			to_chat(owner, span_warning("You don't feel familiar enough with [chosen_object.conjure_ability_check] to summon a [chosen_object.name]"))
+			owner.bloodpool += 5 //Returns the BP spent on the ability, because they never had a chance to summon it.
+			return
+		if(ability_check_roll <= 0)
+			to_chat(owner, span_warning("You focus on creating the [chosen_object.name], but the mental image slips from your grip. Maybe if you tried again?"))
+			return
+
 	chosen_object = new
 	user.put_in_hands(chosen_object)
 	switch(copy_quality)
