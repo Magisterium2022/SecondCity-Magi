@@ -88,23 +88,25 @@
 	)
 
 	//Anything else which is mechanically or materially complex, but not a weapon. Lighters, etc.
-	var/list/conjured_misc_items
-	conjured_misc_items = list(
-	"Fire Extinguisher" = 
-	"Lighter" = 
-	"Cigar" = 
-	"Cigarettes" = 
-	"Torch" = 
-	"Pipe" = 
-	"Matches" = 
-	"Pen" = 
-	"Paper" = 
-	"Spray Can" = 
-	"Phone" = 
-	"Lockpick" = 
-	"Gloves" = 
-	"Camera" = 
-	"Camera Film" = 
+	var/list/conjured_misc_items = list(
+	"Fire Extinguisher" = /obj/item/extinguisher
+	"Lighter" = /obj/item/lighter
+	"Cigar" = /obj/item/storage/fancy/cigarettes/cigars/havana
+	"Cigarettes" = /obj/item/storage/fancy/cigarettes
+	"Torch" = /obj/item/flashlight
+	"Pipe" = /obj/item/cigarette/pipe
+	"Matches" = /obj/item/storage/box/matches
+	"Pen" = /obj/item/pen
+	"Fountain Pen" = /obj/item/pen/fountain
+	"Red Pen" = /obj/item/pen/red
+	"Paper" = /obj/item/paper
+	"Spray Can" = /obj/item/toy/crayon/spraycan
+	"Phone" = /obj/item/smartphone
+	"SIM Card" = /obj/item/sim_card
+	"Lockpick" = /obj/item/vamp/keys/hack
+	"Gloves" = /obj/item/camera
+	"Camera" = /obj/item/camera_film
+	"Camera Film" = /obj/item/camera_film
 	"Tape Recorder" = /obj/item/taperecorder
 	"Tape Recorder Tape" = /obj/item/tape
 	"Screwdriver" = /obj/item/screwdriver
