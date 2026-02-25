@@ -31,12 +31,32 @@
 				SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 				tear_living_flesh(bit_living, TRUE)
 
-/mob/living/carbon/human/proc/tear_dead_flesh()
+/mob/living/carbon/human/proc/tear_dead_flesh(mob/living/eaten_from)
 	if(!COOLDOWN_FINISHED(src, tear_dead_use_cd))
 		return
 	COOLDOWN_START(src, tear_dead_use_cd, 3 SECONDS)
 
-/mob/living/carbon/human/proc/tear_living_flesh()
+/mob/living/carbon/human/proc/tear_living_flesh(mob/living/eaten_from)
 	if(!COOLDOWN_FINISHED(src, tear_living_use_cd))
 		return
 	COOLDOWN_START(src, tear_living_use_cd, 3 SECONDS)
+
+	if(isnpc(drunk_from))
+		var/mob/living/carbon/human/npc/NPC = eaten_from
+		NPC.danger_source = null
+		eaten_from.Stun(40) //NPCs don't get to resist
+
+	else if(!do_after(src, 3 SECONDS, target = eaten_from, timed_action_flags = NONE, progress = FALSE))
+		eaten_from.Stun(40) //NPCs don't get to resist
+
+if(ishuman(eaten_from))
+		var/mob/living/carbon/human/H = eaten_from
+		eaten_of |= "[H.dna.real_name]"
+
+		if(iskindred(eaten_from))
+			to_chat(owner,span_warning("You notice something is wrong. [bit_living]'s flesh is dead, with a strong Yin aspect."))
+
+		if(iskindred(eaten_from))
+			to_chat(owner,span_warning("You notice something is wrong. [bit_living]'s flesh is dead, with a strong Yin aspect."))
+
+		eaten_from.adjust_brute_loss(60, TRUE)
