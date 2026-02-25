@@ -49,3 +49,11 @@
 
 	/// List of supernatural types that this mob is part of
 	var/list/datum/splat/splats
+
+	///KOTE DEFINES
+	var/yin_chi = 0
+	var/yang_chi = 0
+	var/demon_chi = 0
+	var/tainted_yin_chi = 0
+	var/tainted_yang_chi = 0
+	var/golden_chi = 0
