@@ -1,7 +1,7 @@
 /mob/living/carbon/human/proc/kj_flesh_eat()
-	if(!COOLDOWN_FINISHED(src, flesh_eat_use_cd) || !COOLDOWN_FINISHED(src, drinkblood_click_cd))
+	if(!COOLDOWN_FINISHED(src, flesh_eat_use_cd))
 		return
-	COOLDOWN_START(src, flesh_eat_click_cd, 1 SECONDS)
+	COOLDOWN_START(src, flesh_eat_use_cd, 1 SECONDS)
 	if(grab_state > GRAB_PASSIVE)
 		if(isliving(pulling))
 			var/mob/living/bit_living = pulling
@@ -30,3 +30,13 @@
 				bit_living.visible_message(span_warning(span_bold("[src] tears a chunk out of [bit_living]'s flesh!")), span_warning(span_bold("[src] attacks your flesh, biting viciously!")))
 				SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 				tear_living_flesh(bit_living, TRUE)
+
+/mob/living/carbon/human/proc/tear_dead_flesh()
+	if(!COOLDOWN_FINISHED(src, tear_dead_use_cd))
+		return
+	COOLDOWN_START(src, tear_dead_use_cd, 3 SECONDS)
+
+/mob/living/carbon/human/proc/tear_living_flesh()
+	if(!COOLDOWN_FINISHED(src, tear_living_use_cd))
+		return
+	COOLDOWN_START(src, tear_living_use_cd, 3 SECONDS)
