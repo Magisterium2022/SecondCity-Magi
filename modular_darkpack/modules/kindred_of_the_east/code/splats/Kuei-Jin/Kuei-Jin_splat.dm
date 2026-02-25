@@ -14,6 +14,7 @@
 		TRAIT_CAN_ENTER_TORPOR,
 		TRAIT_KJ_DHARMAS,
 		TRAIT_KJ_RANKS,
+		TRAIT_STAKE_IMMUNE,
 		TRAIT_UNAGING,
 		TRAIT_DRINKS_BLOOD
 	)
@@ -69,8 +70,12 @@
 		tongue?.disliked_foodtypes = NONE
 		tongue?.toxic_foodtypes = ~(GORE | MEAT | RAW)
 
+	if(src.chi_aspected = yin_strong)
+		ADD_TRAIT(src, TRAIT_COLD_AURA, GENERIC) //Stacks with observe text to make them look paler.
+
 	if((src.chi_aspected = yang) || (src.chi_aspected = yang_strong))
-		
+		ADD_TRAIT(src, TRAIT_WARM_AURA, GENERIC)
+		ADD_TRAIT(src, TRAIT_BLUSH_OF_HEALTH, GENERIC)
 
 	// Apply temperature damage modifiers
 	owner.physiology.heat_mod *= 2
