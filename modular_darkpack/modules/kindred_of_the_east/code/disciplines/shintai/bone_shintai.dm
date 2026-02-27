@@ -1,17 +1,17 @@
-/datum/discipline/bone_shintai
+/datum/discipline/chi/bone_shintai
 	name = "Bone Shintai"
 	desc = "Channel the power of Metal."
 	icon_state = 
-	power_type = /datum/discipline_power/bone_shintai
+	power_type = /datum/discipline_power/chi/bone_shintai
 
-/datum/discipline_power/bone_shintai
+/datum/discipline_power/chi/bone_shintai
 	name = "Bone Shintai power name"
 	desc = "Bone Shintai power description"
 
 	effect_sound = 'code/modules/wod13/sounds/boneshintai_activate.ogg'
 
 //CORPSE SKIN	
-/datum/discipline_power/bone_shintai/corpse_skin
+/datum/discipline_power/chi/bone_shintai/corpse_skin
 	name = "Corpse Skin"
 	desc = "Turn more corpselike, improving resistance to physical attacks."
 
@@ -25,7 +25,7 @@
 	hostile = TRUE
 	violates_masquerade = TRUE
 
-/datum/discipline_power/bone_shintai/corpse_skin/activate()
+/datum/discipline_power/chi/bone_shintai/corpse_skin/activate()
 	. = ..()
 	owner.visible_message(span_danger("Your body seizes with rigor mortis."), span_danger("Your senses dull to pain and everything else."))
 	owner.dna.species.brutemod = max(0.2, caster.dna.species.brutemod-0.3) //equivalent of the existing artifact
@@ -39,7 +39,7 @@
 	owner.update_body()
 	ADD_TRAIT(owner, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 
-/datum/discipline_power/bone_shintai/corpse_skin/deactivate()
+/datum/discipline_power/chi/bone_shintai/corpse_skin/deactivate()
 	. = ..()
 	owner.visible_message(span_danger("Your body suddenly loses its unnatural pallor."), span_danger("Your senses flare back!"))
 	REMOVE_TRAIT(owner, TRAIT_NOSOFTCRIT, MAGIC_TRAIT)
@@ -53,7 +53,7 @@
 	REMOVE_TRAIT(owner, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 
 //WHITE TIGER CORPSE
-/datum/discipline_power/bone_shintai/white_tiger_corpse
+/datum/discipline_power/chi/bone_shintai/white_tiger_corpse
 	name = "White Tiger Corpse"
 	desc = "Fade from view for a time."
 
@@ -66,16 +66,16 @@
 	hostile = FALSE
 	violates_masquerade = FALSE
 
-/datum/discipline_power/bone_shintai/white_tiger_corpse/activate(mob/living/target) //Visceratika does it this way, and Auspex is apparently being reworked to fix the way auras are shown. 
+/datum/discipline_power/chi/bone_shintai/white_tiger_corpse/activate(mob/living/target) //Visceratika does it this way, and Auspex is apparently being reworked to fix the way auras are shown. 
 	. = ..()
 	owner.alpha = 10
 
-/datum/discipline_power/bone_shintai/white_tiger_corpse/deactivate()
+/datum/discipline_power/chi/bone_shintai/white_tiger_corpse/deactivate()
 	. = ..()
 	owner.alpha = 255
 
 //BONE OBEDIENCE
-/datum/discipline_power/bone_shintai/bone_obedience
+/datum/discipline_power/chi/bone_shintai/bone_obedience
 	name = "Bone Obedience"
 	desc = "Extrude one of a variety of bone weapons and armours."
 
@@ -89,7 +89,7 @@
 	violates_masquerade = FALSE
 	var/selected_item
 
-/datum/discipline_power/bone_shintai/bone_obedience/activate()
+/datum/discipline_power/chi/bone_shintai/bone_obedience/activate()
 	. = ..()
 	if(owner.Yin_Chi == 0)
 		owner.visible_message(span_danger("You don't have sufficient Yin Chi to use this effect!")))
@@ -104,7 +104,7 @@
 		owner.put_in_l_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
 		owner.Yin_Chi -= 1
 	if("Armour")
-		if(owner.Yin_Chi >= 2)
+		if(owner.Yin_Chi > 2)
 			owner.visible_message(span_danger("You don't have sufficient Yin Chi to use this effect!")))
 			return
 		selected_item = "Armour"
@@ -118,7 +118,7 @@
 		owner.put_in_r_hand(new /obj/item/vamp/keys/hack/bone(owner))
 		owner.lockpicking += 3
 
-/datum/discipline_power/bone_shintai/bone_obedience/deactivate()
+/datum/discipline_power/chi/bone_shintai/bone_obedience/deactivate()
 	. = ..()
 	switch(selected_item)
 	if("Bone Claws")
@@ -132,7 +132,7 @@
 	selected_item = null
 
 //FIVE POISON CLOUD
-/datum/discipline_power/bone_shintai/five_poison_cloud
+/datum/discipline_power/chi/bone_shintai/five_poison_cloud
 	name = "Five Poison Cloud"
 	desc = "Exhale a cloud of destructive Yin Chi."
 
