@@ -1,0 +1,6 @@
+#define NUMINA_BASE "Mundane"
+#define NUMINA_FAITH "True Faith"
+#define NUMINA_PSYCHIC "Psychic"
+#define NUMINA_SORCERY "Sorcerer"
+
+#define NUMINA_ALL list(NUMINA_BASE, NUMINA_FAITH, NUMINA_PSYCHIC, NUMINA_SORCERY)
