@@ -4,3 +4,5 @@
 #define NUMINA_SORCERY "Sorcerer"
 
 #define NUMINA_ALL list(NUMINA_BASE, NUMINA_FAITH, NUMINA_PSYCHIC, NUMINA_SORCERY)
+
+#define NUMINA_TRAIT "numina"
