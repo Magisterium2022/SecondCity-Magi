@@ -1,5 +1,5 @@
-/datum/splat/werewolf
-	abstract_type = /datum/splat/werewolf
+/datum/splat/numina
+	abstract_type = /datum/splat/numina
 
 	var/datum/subsplat/numina/true_faith
 	var/datum/subsplat/numina/psychic
