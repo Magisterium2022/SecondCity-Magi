@@ -1,7 +1,9 @@
-/datum/splat/numina
-	name = "Numina"
-	desc = "The supernatural is not limited to Vampires and Werewolves. Some humans are possessed of strange abilities, whether through innate traits, faith, or long decades of practice."
-	id = SPLAT_NUMINA
+/datum/splat/werewolf
+	abstract_type = /datum/splat/werewolf
+
+	var/datum/subsplat/numina/true_faith
+	var/datum/subsplat/numina/psychic
+	var/datum/subsplat/numina/sorcery
 
 	splat_actions = list(
 		/datum/action/cooldown/mob_cooldown/give_vitae,
