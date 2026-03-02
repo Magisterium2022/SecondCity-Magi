@@ -10,4 +10,10 @@
 #define SPLAT_GAROU "splat_garou"
 #define SPLAT_CORAX "splat_corax" // DARKPACK TODO - CORAX
 
+///Parent type for Numina.
+//#define SPLAT_NUMINA "splat_numina"
+#define SPLAT_TRUE_FAITH "splat_true_faith"
+#define SPLAT_PSYCHIC "splat_psychic"
+#define SPLAT_SORCERER "splat_sorcerer"
+
 #define SPLAT_ALL list(SPLAT_NONE, SPLAT_KINDRED, SPLAT_GHOUL, SPLAT_KINFOLK, SPLAT_GAROU)
