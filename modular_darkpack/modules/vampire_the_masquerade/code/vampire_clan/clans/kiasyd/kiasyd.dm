@@ -4,7 +4,7 @@
 	desc = "The Kiasyd are a bloodline of the Lasombra founded after a mysterious \"accident\" involving the Lasombra Marconius of Strasbourg. The \"accident\", involving faeries and the blood of \"Zeernebooch, a god of the Underworld\", resulted in Marconius gaining several feet in height, turning chalky white and developing large, elongated black eyes."
 	icon = "kiasyd"
 	curse = "At a glance they look unsettling or perturbing to most, their appearance closely resembles fae from old folklore. Kiasyd are also in some way connected with changelings and they are vulnerable to cold iron."
-
+	sense_the_sin_text = "is afraid of cold iron."
 	clan_disciplines = list(
 		/datum/discipline/dominate,
 		/datum/discipline/obtenebration,
@@ -44,6 +44,13 @@
 		losing_mob.add_quirk(/datum/quirk/dwarf)
 	*/
 
+	// replace eyes
+	var/eye_type = /obj/item/organ/eyes
+	if(losing_mob.dna.species && losing_mob.dna.species.mutanteyes)
+		eye_type = losing_mob.dna.species.mutanteyes
+	var/obj/item/organ/eyes/new_eyes = new eye_type()
+	new_eyes.Insert(losing_mob, TRUE, DELETE_IF_REPLACED)
+
 	losing_mob.update_body()
 
 /datum/subsplat/vampire_clan/kiasyd/on_join_round(mob/living/carbon/human/joining)
@@ -55,5 +62,10 @@
 
 
 /obj/item/organ/eyes/kiasyd
-	// DARKPACK TODO - requires https://github.com/tgstation/tgstation/pull/94242
-	// eye_icon_state = "kiasyd"
+	eye_icon = 'modular_darkpack/modules/vampire_the_masquerade/icons/human_eyes.dmi'
+	eye_icon_state = "kiasyd"
+	eye_color_left = "#FFFFFF"
+	eye_color_right = "#FFFFFF"
+
+	iris_overlay = null
+	blink_animation = FALSE
