@@ -1410,6 +1410,3 @@
 	if (overeatduration >= 200 SECONDS)
 		to_chat(src, span_danger("You suddenly feel blubbery!"))
 		add_traits(list(TRAIT_FAT, TRAIT_OFF_BALANCE_TACKLER), OBESITY)
-
-/mob/living/carbon/update_soak() //Pretty basic calculation for the average person/being, soak is Bashing only using Stamina.
-	bashing_soak = st_get_stat(STAT_STAMINA
