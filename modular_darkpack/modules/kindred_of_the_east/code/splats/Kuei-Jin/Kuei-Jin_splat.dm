@@ -72,7 +72,7 @@
 
 	if(src.chi_aspected = yin_strong)
 		ADD_TRAIT(src, TRAIT_COLD_AURA, GENERIC) //Stacks with observe text to make them look paler.
-		ADD_TRAIT(src, SPENDING_YIN, CHI) //Sets defauly Yin or Yang spend, which can also be changed.
+		ADD_TRAIT(src, SPENDING_YIN, CHI) //Sets default Yin or Yang spend, which can also be changed.
 
 	if((src.chi_aspected = yang) || (src.chi_aspected = yang_strong))
 		ADD_TRAIT(src, TRAIT_WARM_AURA, GENERIC)
