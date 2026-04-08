@@ -5,11 +5,6 @@
 	if(grab_state > GRAB_PASSIVE)
 		if(isliving(pulling))
 			var/mob/living/bit_living = pulling
-			if(!isvampiresplat(src)) //Shouldn't ever come up unless someone makes a mistake, but it's useful to have judt in case.
-				SEND_SOUND(src, sound('modular_darkpack/modules/blood_drinking/sounds/need_blood.ogg', volume = 75))
-				to_chat(src, span_warning("You're not desperate enough to try <i>that</i>.")) 
-				return
-
 			if(bit_living.stat == DEAD)
 				SEND_SOUND(src, sound('', volume = 75))
 				to_chat(src,span_warning("You eagerly begin tearing into the Yin-aspected flesh of the corpse."))
@@ -17,7 +12,7 @@
 				SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 				tear_dead_flesh(bit_living, TRUE)
 
-			bit_living.emote("scream")
+
 
 			if(ishuman(bit_living))
 				var/mob/living/carbon/human/bit_human = bit_living
@@ -35,28 +30,35 @@
 	if(!COOLDOWN_FINISHED(src, tear_dead_use_cd))
 		return
 	COOLDOWN_START(src, tear_dead_use_cd, 3 SECONDS)
+	adjust_chi_pool(1, TRUE, null, Yin))
 
 /mob/living/carbon/human/proc/tear_living_flesh(mob/living/eaten_from)
 	if(!COOLDOWN_FINISHED(src, tear_living_use_cd))
 		return
 	COOLDOWN_START(src, tear_living_use_cd, 3 SECONDS)
+	bit_living.emote("scream")
 
-	if(isnpc(drunk_from))
+	if(isnpc(eaten_from))
 		var/mob/living/carbon/human/npc/NPC = eaten_from
 		NPC.danger_source = null
 		eaten_from.Stun(40) //NPCs don't get to resist
+		adjust_chi_pool(1, TRUE, null, Yang)
 
 	else if(!do_after(src, 3 SECONDS, target = eaten_from, timed_action_flags = NONE, progress = FALSE))
 		eaten_from.Stun(40) //NPCs don't get to resist
 
-if(ishuman(eaten_from))
+	if(ishuman(eaten_from))
 		var/mob/living/carbon/human/H = eaten_from
 		eaten_of |= "[H.dna.real_name]"
 
-		if(iskindred(eaten_from))
-			to_chat(owner,span_warning("You notice something is wrong. [bit_living]'s flesh is dead, with a strong Yin aspect."))
+		if(get_kindred_splat(eaten_from))
+			to_chat(owner,span_warning("You notice something is wrong. [bit_living]'s flesh is dead, with a strong Yin aspect!"))
+			adjust_chi_pool(2, TRUE, null, Yin)
 
-		if(iskindred(eaten_from))
-			to_chat(owner,span_warning("You notice something is wrong. [bit_living]'s flesh is dead, with a strong Yin aspect."))
+		if((get_garou_splat(eaten_from))
+			to_chat(owner,span_warning("You notice something is wrong. [bit_living]'s flesh is roaring with Yang Energy!"))
+			adjust_chi_pool(2, TRUE, null, Yang)
 
+		else
+			adjust_chi_pool(1, TRUE, null, Yang)
 		eaten_from.adjust_brute_loss(60, TRUE)
