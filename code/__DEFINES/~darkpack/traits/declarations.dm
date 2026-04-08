@@ -161,4 +161,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HORRIFIC_APPEARANCE "horrific_appearance"
 #define TRAIT_STILLNESS_OF_DEATH "stillness_of_death"
 
+#define TRAIT_SPENDING_YANG "spending_yang" //Used for defining whether they're spending Yin or Yang when applicable. Not just defining one and leaving the other as else, just to cover edge cases and errors.
+#define TRAIT_SPENDING_YIN "spending_yin"
+
 // END TRAIT DEFINES
