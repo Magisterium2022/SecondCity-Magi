@@ -1,5 +1,5 @@
 //Wrapper function for adjusting chi pools.
-/mob/living/proc/adjust_blood_pool(amount, updating_health = TRUE, on_spawn, chi_type)
+/mob/living/proc/adjust_chi_pool(amount, updating_health = TRUE, on_spawn, chi_type)
 	if(on_spawn) //Add a check for dharma.
 
   switch(chi_type)
