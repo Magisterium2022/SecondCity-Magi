@@ -36,7 +36,7 @@
 	ADD_TRAIT(owner, TRAIT_LUMINESCENT_EYES, DISCIPLINE_TRAIT)
 	ADD_TRAIT(owner, TRAIT_MASQUERADE_VIOLATING_FACE, DISCIPLINE_TRAIT)
 
-/datum/discipline_power/chi/ghost_flame_shintai/goblin_face/activate()
+/datum/discipline_power/chi/ghost_flame_shintai/goblin_face/deactivate()
 	. = ..()
 	owner.clear_fullscreen("ghostflame", 5)
 	owner.set_light(0)
