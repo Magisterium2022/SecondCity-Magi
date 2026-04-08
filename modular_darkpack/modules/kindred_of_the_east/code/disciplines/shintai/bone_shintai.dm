@@ -148,7 +148,10 @@
 /datum/discipline_power/bone_shintai/five_poison_cloud/activate()
 	. = ..()
 	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
-	var/datum/effect_system/smoke_spread/bad/yin/smoke = new
-	smoke.set_up(4, src)
-	smoke.start()
-	qdel(smoke)
+	do_smoke(3, owner, owner.loc, smoke_type = /datum/effect_system/fluid_spread/smoke/bad)
+
+	for(var/mob/living/L in range(3, owner))
+		if(L != owner)
+			to_chat(L, span_danger("You're enveloped by a burning black cloud!"))
+			L.emote("scream")
+			L.apply_damage(2 TTRPG_DAMAGE, AGGRAVATED)
