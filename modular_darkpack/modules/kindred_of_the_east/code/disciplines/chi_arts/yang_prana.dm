@@ -20,7 +20,7 @@
 
 
 
-//GOBLIN FACE
+//PRINCIPLE OF MOTION
 /datum/discipline_power/chi/yang_prana/principle_of_motion
 	name = "Principle of Motion"
 	desc = "I"
@@ -34,5 +34,5 @@
 /datum/discipline_power/chi/yang_prana/principle_of_motion/activate()
 	. = ..()
 
-/datum/discipline_power/chi/yang_prana/goblin_face/deactivate()
+/datum/discipline_power/chi/yang_prana/principle_of_motion/deactivate()
 	. = ..()
