@@ -19,9 +19,9 @@
 
 
 
-//
-/datum/discipline_power/chi/yin_prana/principle_of_motion
-	name = "Principle of Motion"
+//SHROUDED MOON
+/datum/discipline_power/chi/yin_prana/shrouded_moon
+	name = "Shrouded Moon"
 	desc = "I"
 	level = 1
 	violates_masquerade = TRUE
@@ -30,8 +30,8 @@
 
 
 
-/datum/discipline_power/chi/yin_prana/principle_of_motion/activate()
+/datum/discipline_power/chi/yin_prana/shrouded_moon/activate()
 	. = ..()
 
-/datum/discipline_power/chi/yin_prana/goblin_face/deactivate()
+/datum/discipline_power/chi/yin_prana/shrouded_moon/deactivate()
 	. = ..()
