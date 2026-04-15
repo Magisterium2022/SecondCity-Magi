@@ -17,7 +17,28 @@
 	else
 		owner.visible_message(span_notice("[owner] begins focusing intently, freezing completely still in place."))
 
+/datum/discipline_power/chi/yin_prana/proc/on_talk(datum/source, list/speech_args)
+	SIGNAL_HANDLER
 
+	// This is a soft reveal as only as you would only be revealed to the person next to you. (which we are missing implementation of rn)
+	if(speech_args[SPEECH_MODS][WHISPER_MODE] == MODE_WHISPER)
+		return
+
+	to_chat(owner, span_danger("Your Concealment falls away as you reveal yourself!"))
+	try_deactivate(direct = TRUE)
+
+	deltimer(cooldown_timer)
+	cooldown_timer = addtimer(CALLBACK(src, PROC_REF(cooldown_expire)), COMBAT_COOLDOWN_LENGTH, TIMER_STOPPABLE | TIMER_DELETE_ME)
+
+/datum/discipline_power/chi/yin_prana/proc/handle_move(datum/source, atom/moving_thing, dir)
+	SIGNAL_HANDLER
+
+	if (owner.move_intent != MOVE_INTENT_WALK)
+		to_chat(owner, span_danger("Your Concealment falls away as you move too quickly!"))
+		try_deactivate(direct = TRUE)
+
+		deltimer(cooldown_timer)
+		cooldown_timer = addtimer(CALLBACK(src, PROC_REF(cooldown_expire)), REVEAL_COOLDOWN_LENGTH, TIMER_STOPPABLE | TIMER_DELETE_ME)
 
 //SHROUDED MOON
 /datum/discipline_power/chi/yin_prana/shrouded_moon
@@ -30,8 +51,25 @@
 
 
 
-/datum/discipline_power/chi/yin_prana/shrouded_moon/activate()
+/datum/discipline_power/chi/yin_prana/shrouded_moon/activate() //Should only work in the dark, but detection for that would be a pain, and it'd massively limit utility.
 	. = ..()
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal))
+	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
+	RegisterSignal(owner, COMSIG_POWER_ACTIVATE, PROC_REF(on_discipline_activation))
+	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(on_talk))
+
+	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
+		if (NPC.danger_source == owner)
+			NPC.danger_source = null
+
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, YIN_PRANA_TRAIT)
 
 /datum/discipline_power/chi/yin_prana/shrouded_moon/deactivate()
 	. = ..()
+
+	UnregisterSignal(owner, aggressive_signals)
+	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
+	UnregisterSignal(owner, list(COMSIG_POWER_ACTIVATE, COMSIG_MOB_SAY))
+
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, YIN_PRANA_TRAIT)
+
