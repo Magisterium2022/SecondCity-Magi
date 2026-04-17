@@ -49,8 +49,6 @@
 	cooldown_length = 1 TURNS
 	toggled = TRUE
 
-
-
 /datum/discipline_power/chi/yin_prana/shrouded_moon/activate() //Should only work in the dark, but detection for that would be a pain, and it'd massively limit utility.
 	. = ..()
 	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal))
@@ -73,3 +71,38 @@
 
 	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, YIN_PRANA_TRAIT)
 
+//YIN MANTLE
+/datum/discipline_power/chi/yin_prana/yin_mantle
+	name = "Yin Mantle"
+	desc = "I"
+	level = 2
+	violates_masquerade = TRUE
+	cooldown_length = 1 TURNS
+	toggled = TRUE
+
+//BONE DANCE
+/datum/discipline_power/chi/yin_prana/bone_dance
+	name = "Bone Dance"
+	desc = "I"
+	level = 3
+	violates_masquerade = TRUE
+	cooldown_length = 1 TURNS
+	toggled = TRUE
+
+//EIGHTFOLD YIN MANTLE
+/datum/discipline_power/chi/yin_prana/eightfold_yin_mantle
+	name = "Eightfold Yin Mantle"
+	desc = "I"
+	level = 4
+	violates_masquerade = TRUE
+	cooldown_length = 1 TURNS
+	toggled = TRUE
+
+//SEMBLANCE OF THE EBON QUEEN
+/datum/discipline_power/chi/yin_prana/semblance_of_the_ebon_queen
+	name = "Semblance of the Ebon Queen"
+	desc = "I"
+	level = 5
+	violates_masquerade = TRUE
+	cooldown_length = 1 TURNS
+	toggled = TRUE
