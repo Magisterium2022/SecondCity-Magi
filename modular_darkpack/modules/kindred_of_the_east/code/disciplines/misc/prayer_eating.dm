@@ -1,10 +1,10 @@
-/datum/discipline/chi/
-	name = ""
+/datum/discipline/chi/prayer_eating
+	name = "Prayer Eating"
 	desc = ""
 	icon_state = ""
-	power_type = /datum/discipline_power/chi/
+	power_type = /datum/discipline_power/chi/prayer_eating
 
-/datum/discipline_power/chi/
-	name = " power name"
-	desc = " power description"
+/datum/discipline_power/chi/prayer_eating
+	name = "Prayer Eating power name"
+	desc = "Prayer Eating power description"
 	effect_sound = ''
