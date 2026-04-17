@@ -11,6 +11,8 @@
 #define SPLAT_CORAX "splat_corax" // DARKPACK TODO - CORAX
 #define SPLAT_SHIFTERS list(SPLAT_GAROU, SPLAT_CORAX)
 
+#define SPLAT_KUEI_JIN "splat_kuei_jin"
+
 #define SPLAT_PRIO_HALFSPLAT 100
 #define SPLAT_PRIO_SPLAT 200
 
