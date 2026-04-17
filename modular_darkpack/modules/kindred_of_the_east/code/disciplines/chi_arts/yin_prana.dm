@@ -109,7 +109,7 @@
 
 /datum/discipline_power/chi/yin_prana/semblance_of_the_ebon_queen/activate() //Turns them into pure Yin energy and pushes them into the Yin world, where ghosts and spirits exist. I need to do it this way because they maintain a vulnerability to Mental effects such as Dominate.
 	. = ..()
-	ADD_TRAIT(src, TRAIT_GODMODE, CHI_TRAIT)//Immune to any form of physical or magical attack, but still vulnerable to Mental attacks from those who can see them. DOminate and similar still work on those in Godmode.
+	ADD_TRAIT(src, TRAIT_GODMODE, CHI_TRAIT)//Immune to any form of physical or magical attack, but still vulnerable to Mental attacks from those who can see them. Dominate and similar still work on those in Godmode.
 	ADD_TRAIT(owner, TRAIT_HANDS_BLOCKED, CHI_TRAIT)//No picking up items when you're intangible.
 	ADD_TRAIT(owner, TRAIT_PACIFIST, CHI_TRAIT)//You can't punch people from across the veil.
 	ADD_TRAIT(owner, TRAIT_GHOST_VISION, CHI_TRAIT)
