@@ -6,5 +6,5 @@
 
 /datum/discipline_power/chi/tapestry
 	name = "Tapestry power name"
-	desc = "Teapstry power description"
+	desc = "Tapestry power description"
 	effect_sound = ''
