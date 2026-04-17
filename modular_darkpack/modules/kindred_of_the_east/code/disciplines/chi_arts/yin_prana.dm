@@ -43,7 +43,7 @@
 //SHROUDED MOON
 /datum/discipline_power/chi/yin_prana/shrouded_moon
 	name = "Shrouded Moon"
-	desc = "I"
+	desc = "Attune yourself to the shadows and fade into the night."
 	level = 1
 	violates_masquerade = TRUE
 	cooldown_length = 1 TURNS
@@ -74,7 +74,7 @@
 //YIN MANTLE
 /datum/discipline_power/chi/yin_prana/yin_mantle
 	name = "Yin Mantle"
-	desc = "I"
+	desc = "Conjure forth the essence of your Yin."
 	level = 2
 	violates_masquerade = TRUE
 	cooldown_length = 1 TURNS
@@ -83,7 +83,7 @@
 //BONE DANCE
 /datum/discipline_power/chi/yin_prana/bone_dance
 	name = "Bone Dance"
-	desc = "I"
+	desc = "Permate the local area with Yin energy, inducing tiredness and suggestiveness in others."
 	level = 3
 	violates_masquerade = TRUE
 	cooldown_length = 1 TURNS
@@ -92,7 +92,7 @@
 //EIGHTFOLD YIN MANTLE
 /datum/discipline_power/chi/yin_prana/eightfold_yin_mantle
 	name = "Eightfold Yin Mantle"
-	desc = "I"
+	desc = "Call forth Yin Chi into physical objects."
 	level = 4
 	violates_masquerade = TRUE
 	cooldown_length = 1 TURNS
@@ -101,8 +101,20 @@
 //SEMBLANCE OF THE EBON QUEEN
 /datum/discipline_power/chi/yin_prana/semblance_of_the_ebon_queen
 	name = "Semblance of the Ebon Queen"
-	desc = "I"
+	desc = "Transform into an invisible and intangible cloud of Yin energy and enter the Yin world."
 	level = 5
 	violates_masquerade = TRUE
 	cooldown_length = 1 TURNS
 	toggled = TRUE
+
+/datum/discipline_power/chi/yin_prana/semblance_of_the_ebon_queen/activate() //Turns them into pure Yin energy and pushes them into the Yin world, where ghosts and spirits exist.
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_GHOST_VISION, CHI_TRAIT)
+	owner.update_sight()
+	owner.incorporeal_move = INCORPOREAL_MOVE_SHADOW
+	
+
+/datum/discipline_power/chi/yin_prana/semblance_of_the_ebon_queen/deactivate() //
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_GHOST_VISION, CHI_TRAIT)
+	owner.update_sight()
