@@ -28,7 +28,7 @@
 		/datum/splat/vampire
 	)
 
-	/// What level their Dharma is at. Equivalent to Generation for Kindred, with 1 being roughly 13th and 10 being roughly 3rd.
+	/// What level their Dharma is at. Equivalent to Generation for Kindred, with 0 being roughly 13th and 10 being roughly 3rd.
 	var/dharma_level
 	/// How quickly they can spend Chi. Depends on Dharma level.
 	var/chi_spending_rate
@@ -42,7 +42,7 @@
 		GLOB.kindred_list |= owner
 
 	// Set generation for dominate, etc, purposes.
-	set_generation(14 - dharma)
+	set_generation(13 - dharma)
 
 	owner.give_st_power() //Add Chi healing and check for if they're Scorpion Eaters or not to use the right chi.
 
@@ -55,9 +55,6 @@
 	//vampires resist vampire bites better than mortals
 	RegisterSignal(owner, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
 
-	// Apply bashing damage resistance
-	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_resistance))
-
 	// Prevent blood loss and regeneration effects
 	RegisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD, PROC_REF(kindred_blood))
 
@@ -69,28 +66,30 @@
 		tongue?.liked_foodtypes = NONE
 		tongue?.disliked_foodtypes = NONE
 		tongue?.toxic_foodtypes = ~(GORE | MEAT | RAW)
+		ADD_TRAIT(src, SPENDING_YIN, CHI) //Sets default Yin or Yang spend, which can also be changed.
+		// Apply temperature damage modifiers
+		owner.physiology.heat_mod *= 2
+		owner.physiology.cold_mod *= 0.25
+		// Apply bashing damage resistance to Yin aspected.
+		RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_resistance))
 
 	if(src.chi_aspected = yin_strong)
 		ADD_TRAIT(src, TRAIT_COLD_AURA, GENERIC) //Stacks with observe text to make them look paler.
-		ADD_TRAIT(src, SPENDING_YIN, CHI) //Sets default Yin or Yang spend, which can also be changed.
 
 	if((src.chi_aspected = yang) || (src.chi_aspected = yang_strong))
 		ADD_TRAIT(src, TRAIT_WARM_AURA, GENERIC)
 		ADD_TRAIT(src, TRAIT_BLUSH_OF_HEALTH, GENERIC)
 		ADD_TRAIT(src, SPENDING_YANG, CHI)
 
-	// Apply temperature damage modifiers
-	owner.physiology.heat_mod *= 2
-	owner.physiology.cold_mod *= 0.25
 
-/datum/splat/vampire/kindred/on_lose()
+
+/datum/splat/vampire/kindred/kuei_jin/on_lose()
 
 
 	UnregisterSignal(owner, list(
 		COMSIG_CARBON_LOSE_ORGAN,
 		SIGNAL_ADDTRAIT(TRAIT_CRITICAL_CONDITION),
 		COMSIG_MOB_VAMPIRE_SUCKED,
-		COMSIG_MOB_APPLY_DAMAGE_MODIFIERS,
 		COMSIG_HUMAN_ON_HANDLE_BLOOD,
 		COMSIG_LIVING_DEATH
 	))
@@ -104,6 +103,8 @@
 	// Reset blood type
 	owner.set_blood_type()
 
-	// Reset temperature damage modifiers
-	owner.physiology.heat_mod *= 0.5
-	owner.physiology.cold_mod *= 4
+	if((src.chi_aspected = yin) || (src.chi_aspected = yin_strong))
+		// Reset temperature damage modifiers
+		owner.physiology.heat_mod *= 0.5
+		owner.physiology.cold_mod *= 4
+		UnregisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS)
