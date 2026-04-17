@@ -4,3 +4,7 @@
 	desc = ""
 	icon = ""
 	philosophy = ""
+	virtue = "Hun"
+
+	dharma_traits = list(
+	)
