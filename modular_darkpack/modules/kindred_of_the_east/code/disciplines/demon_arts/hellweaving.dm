@@ -1,10 +1,10 @@
-/datum/discipline/chi/
-	name = ""
+/datum/discipline/chi/hellweaving
+	name = "Hellweaving"
 	desc = ""
 	icon_state = ""
-	power_type = /datum/discipline_power/chi/
+	power_type = /datum/discipline_power/chi/hellweaving
 
-/datum/discipline_power/chi/
-	name = " power name"
-	desc = " power description"
+/datum/discipline_power/chi/hellweaving
+	name = "Hellweaving power name"
+	desc = "Hellweaving power description"
 	effect_sound = ''
