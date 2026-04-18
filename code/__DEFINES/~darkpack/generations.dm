@@ -29,3 +29,14 @@
 #define MINIMUM_ATHRO_AGE 21
 #define MINIMUM_LUPUS_ELDER_AGE 15
 #define MINIMUM_ELDER_AGE 30
+
+/// Kuei-Jin Defines
+#define HIGHEST_DHARMA_LIMIT 10
+/// Limit for lowest Dharma. Not for standard use, since it's a Wight equivalent.
+#define LOWEST_DHARMA_LIMIT 0
+/// Upper limit for player Dharma
+#define MAX_PLAYER_DHARMA 6
+/// Lower limit for player Dharma
+#define MIN_PLAYER_DHARMA 1
+/// Default Dharma
+#define DEFAULT_DHARMA 1
