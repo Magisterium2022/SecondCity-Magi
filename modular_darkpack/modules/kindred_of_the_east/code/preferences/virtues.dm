@@ -8,24 +8,30 @@
 
 /datum/st_stat/chi_virtues/hun
 	name = "Hun"
-	starting_score = 1
-	score = 1
+	editable = FALSE
 	description = "Your higher self, and consciousness. The inverse to this is your P'o."
 
 /datum/st_stat/chi_virtues/po
 	name = "P'o"
-	starting_score = 1
-	score = 1
+	editable = FALSE
 	description = "Your lower self, and animal instincts. The inverse to this is your Hun."
+
+/datum/st_stat/chi_virtues/hun_po_balance
+	name = "Hun-P'o Balance"
+	description = "Your balance between your Hun and your P'o."
+	freebie_point_cost = 0
 
 /datum/st_stat/chi_virtues/yin
 	name = "Yin"
-	starting_score = 1
-	score = 1
+	editable = FALSE
 	description = "Your capacity to store the energies of Death and Metal, or their tainted equivalents."
 
 /datum/st_stat/chi_virtues/yang
 	name = "Yang"
-	starting_score = 1
-	score = 1
+	editable = FALSE
 	description = "Your capacity to store the energies of Life and Wood, or their tainted equivalents."
+
+/datum/st_stat/chi_virtues/yin_yang_balance
+	name = "Yin-Yang Balance"
+	description = "Your balance between your Yin and your Yang."
+	freebie_point_cost = 0
