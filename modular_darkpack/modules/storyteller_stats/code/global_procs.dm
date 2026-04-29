@@ -16,6 +16,18 @@
 	var/datum/st_stat/stat_temporary_willpower = preference_storyteller_stats[STAT_TEMPORARY_WILLPOWER]
 	stat_temporary_willpower.set_score(stat_permenant_willpower.get_score(include_bonus = TRUE))
 
+	var/datum/st_stat/stat_hun = preference_storyteller_stats[STAT_HUN]
+	var/datum/st_stat/stat_po = preference_storyteller_stats[STAT_PO]
+	var/datum/st_stat/stat_hun_po_balance = preference_storyteller_stats[STAT_HUN_PO_BALANCE]
+	stat_hun.add_stat_mod(stat_hun_po_balance.get_score(include_bonus = TRUE))
+	stat_po.add_stat_mod(10 - stat_hun_po_balance.get_score(include_bonus = TRUE))
+
+	var/datum/st_stat/stat_yin = preference_storyteller_stats[STAT_YIN]
+	var/datum/st_stat/stat_yang = preference_storyteller_stats[STAT_YANG]
+	var/datum/st_stat/stat_yin_yang_balance = preference_storyteller_stats[STAT_YIN_YANG_BALANCE]
+	stat_yin.add_stat_mod(stat_yin_yang_balance.get_score(include_bonus = TRUE))
+	stat_yang.add_stat_mod(10 - stat_yin_yang_balance.get_score(include_bonus = TRUE))
+
 	var/datum/st_stat/morality_path/morality/stat_morality = preference_storyteller_stats[STAT_MORALITY]
 	if(stat_morality?.morality_path)
 		var/datum/st_stat/stat_conscience = preference_storyteller_stats[STAT_CONSCIENCE]

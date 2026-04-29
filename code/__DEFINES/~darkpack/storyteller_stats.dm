@@ -89,3 +89,14 @@
 #define STAT_SCORE "score"
 #define STAT_POINTS "points"
 #define STAT_FREEBIE_COST_SPENT "freebie_cost_spent"
+
+
+//Chi defines
+
+#define STAT_HUN /datum/st_stat/chi_virtues/hun
+#define STAT_PO /datum/st_stat/chi_virtues/po
+#define STAT_HUN_PO_BALANCE /datum/st_stat/chi_virtues/hun_po_balance
+
+#define STAT_YIN /datum/st_stat/chi_virtues/yin
+#define STAT_YANG /datum/st_stat/chi_virtues/yang
+#define STAT_YIN_YANG_BALANCE /datum/st_stat/chi_virtues/yin_yang_balance
