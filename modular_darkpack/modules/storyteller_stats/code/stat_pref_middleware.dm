@@ -36,8 +36,14 @@
 	var/datum/st_stat/stat_path = preferences.preference_storyteller_stats[text2path(params["stat"])]
 	var/datum/st_stat/abstract_stat = preferences.preference_storyteller_stats[stat_path.abstract_type]
 	var/datum/st_stat/freebie_point_stat = preferences.preference_storyteller_stats[STAT_FREEBIE_POINTS]
-	var/old_value = stat_path.get_score(include_bonus = FALSE)
+	var/datum/splat/splat_type = user.client.prefs.read_preference(/datum/preference/choiced/splats)
 
+
+	if(splat_type == /datum/splat/vampire/kindred/kuei_jin && (stat_path.name == "Courage" || stat_path.name == "Conscience" || stat_path.name == "Self-Control" || stat_path.name == "Conviction" || stat_path.name == "Instinct"))//Stops KJ manually adjusting normal Virtues.
+		return FALSE
+
+	if(!splat_type == /datum/splat/vampire/kindred/kuei_jin && (stat_path.name == "Hun-P'o Balance" || stat_path.name == "Yin-Yang Balance"))//Stops non-KJ adjusting CHi Virtues.
+		return FALSE
 
 	if(!stat_path.can_increase_score(1)) // Have we reached the max_score of the stat?
 		return FALSE // If we have, then return early.
@@ -73,6 +79,14 @@
 	var/datum/st_stat/abstract_stat = preferences.preference_storyteller_stats[stat_path.abstract_type]
 	var/datum/st_stat/freebie_point_stat = preferences.preference_storyteller_stats[STAT_FREEBIE_POINTS]
 	var/old_value = stat_path.get_score(include_bonus = FALSE)
+	var/datum/splat/splat_type = user.client.prefs.read_preference(/datum/preference/choiced/splats)
+
+
+	if(splat_type == /datum/splat/vampire/kindred/kuei_jin && (stat_path.name == "Courage" || stat_path.name == "Conscience" || stat_path.name == "Self-Control" || stat_path.name == "Conviction" || stat_path.name == "Instinct"))
+		return FALSE
+
+	if(!splat_type == /datum/splat/vampire/kindred/kuei_jin && (stat_path.name == "Hun-P'o Balance" || stat_path.name == "Yin-Yang Balance"))//Stops non-KJ adjusting CHi Virtues.
+		return FALSE
 
 	if(!stat_path.can_decrease_score(1))
 		return FALSE
