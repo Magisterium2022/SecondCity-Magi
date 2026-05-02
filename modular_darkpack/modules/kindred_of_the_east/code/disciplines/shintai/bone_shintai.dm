@@ -59,20 +59,29 @@
 
 	level = 2
 	check_flags = DISC_CHECK_CONSCIOUS
-	yin_cost = 2
+	yin_cost = 2 //Default cost is 1, plus an extra 1 to cover clothes. Making it automatically cover clothes and just cost 2 for ease of use.
 
 	toggled = TRUE
+	duration_length = 1 SCENES
 
 	hostile = FALSE
-	violates_masquerade = FALSE
+	violates_masquerade = TRUE //You're turning invisible.
 
 /datum/discipline_power/chi/bone_shintai/white_tiger_corpse/activate(mob/living/target) //Visceratika does it this way, and Auspex is apparently being reworked to fix the way auras are shown. 
 	. = ..()
 	owner.alpha = 10
 
+	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
+		if (NPC.danger_source == owner)
+			NPC.danger_source = null
+
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, CHI_TRAIT)
+
 /datum/discipline_power/chi/bone_shintai/white_tiger_corpse/deactivate()
 	. = ..()
 	owner.alpha = 255
+
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, CHI_TRAIT)
 
 //BONE OBEDIENCE
 /datum/discipline_power/chi/bone_shintai/bone_obedience
@@ -150,8 +159,7 @@
 	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
 	do_smoke(3, owner, owner.loc, smoke_type = /datum/effect_system/fluid_spread/smoke/bad)
 
-	for(var/mob/living/L in range(3, owner))
-		if(L != owner)
-			to_chat(L, span_danger("You're enveloped by a burning black cloud!"))
-			L.emote("scream")
-			L.apply_damage(2 TTRPG_DAMAGE, AGGRAVATED)
+	for(var/mob/living/L in orange(3, owner))
+		to_chat(L, span_danger("You're enveloped by a burning black cloud!"))
+		L.emote("scream")
+		L.apply_damage(6 TTRPG_DAMAGE, AGGRAVATED)
