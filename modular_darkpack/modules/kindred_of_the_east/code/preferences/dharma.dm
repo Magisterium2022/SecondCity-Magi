@@ -3,7 +3,7 @@
 	savefile_key = "dharma"
 	savefile_identifier = PREFERENCE_CHARACTER
 	priority = PREFERENCE_PRIORITY_WORLD_OF_DARKNESS
-	relevant_inherent_trait = TRAIT_DRINKS_BLOOD
+	relevant_inherent_trait = TRAIT_KJ
 	minimum = MIN_PLAYER_DHARMA
 	maximum = MAX_PLAYER_DHARMA
 
