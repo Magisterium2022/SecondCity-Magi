@@ -51,6 +51,8 @@ if ((damagetype == BRUTE) && (sharpness != SHARP_EDGED))
 
 HOWEVER, this is /datum/splat/, not /datum/species/. Do I need to replicate the above lines somewhere below down in Zulo code?
 
+Magisterium: Not unless you're messing with the splat here, which you aren't currently.
+
 */
 
 /* Learning notes to self:
@@ -61,36 +63,36 @@ HOWEVER, this is /datum/splat/, not /datum/species/. Do I need to replicate the 
 /datum/species/tzimisce_zulo_form
 	name = "Zulo"
 	plural_form = "Zulo"
-	id = SPECIES_TZIMISCE_ZULO_FORM // we need to add this to the definitions dm files?
+	id = SPECIES_TZIMISCE_ZULO_FORM // we need to add this to the definitions dm files? Magisterium: Yes, otherwise you're giving the species ID as one the code doesn't know.
 	inherent_biotypes = MOB_UNDEAD|MOB_HUMANOID /* Sabby: I admit I'm trying to understand what 'inherent_biotypes' does, I took it as a cue from bloodform code,
-	and, through testing, saw that we have 'MOB_UNDEAD' as an option, so I figured it would be appropriate for Zulo as a species due to being, well, undead. */
+	and, through testing, saw that we have 'MOB_UNDEAD' as an option, so I figured it would be appropriate for Zulo as a species due to being, well, undead. */ //Magisterium: This is fine, MOB_UNDEAD is base TG and might add banes such as silver from it? I'd have to check.
 	inherent_traits = list(
-		TRAIT_ADVANCEDTOOLUSER, // Sabby: present in oldcode. should allow for equiping tools/items in hand?
-		TRAIT_LIMBATTACHMENT, // Sabby: present in oldcode. learned its functionality from bodyparts.dm line 600. Allows easy limb reattachment. Is this needed, given Kindred splat?
-		TRAIT_VIRUSIMMUNE, // Sabby: present in oldcode. should make immune to disease. It seems to check mob living carbon human with CanContractDisease.
-		TRAIT_NOBLOOD, // Sabby: present in oldcode. again from living carbon traits. Should prevent bleeding and blood loss? Makes sense for anything vampire/undead
-		TRAIT_NOHUNGER, // Sabby: present in oldcode. pulls in nutrition toggle from mob.dm row 1494. Used to prevent undead from conventional food hunger?
+		TRAIT_ADVANCEDTOOLUSER, // Sabby: present in oldcode. should allow for equiping tools/items in hand? Magisterium: That's correct.
+		TRAIT_LIMBATTACHMENT, // Sabby: present in oldcode. learned its functionality from bodyparts.dm line 600. Allows easy limb reattachment. Is this needed, given Kindred splat? Magisterium: No.
+		TRAIT_VIRUSIMMUNE, // Sabby: present in oldcode. should make immune to disease. It seems to check mob living carbon human with CanContractDisease. Magisterium: That's correct.
+		TRAIT_NOBLOOD, // Sabby: present in oldcode. again from living carbon traits. Should prevent bleeding and blood loss? Makes sense for anything vampire/undead Magisterium: That's correct.
+		TRAIT_NOHUNGER, // Sabby: present in oldcode. pulls in nutrition toggle from mob.dm row 1494. Used to prevent undead from conventional food hunger? 
 		TRAIT_NOBREATH, // Sabby: present in oldcode. found functionality to study/understand on _lungs.dm it simply untoggles check_breath from lungs if = TRAT_NOBREATH.
 		TRAIT_TOXIMMUNE, // Sabby: present in oldcode. studed functionality on damage_procs.dm. Basically untoggles toxic damage?
 		TRAIT_NOCRITDAMAGE, // Sabby: present in oldcode. still a bit fuzzy on how this works. life.dm has functionality description. Basically keeps from going into critical?
 		TRAIT_MASQUERADE_VIOLATING_FACE, // Sabby: present in oldcode. pretty self-explanatory I feel
-		TRAIT_STRONG_GRABBER, // Sabby: present in oldcode. struggling to understand functionality from living.dm (~ line 410). Sensible for big war form to be strong at grabs, however.
+		TRAIT_STRONG_GRABBER, // Sabby: present in oldcode. struggling to understand functionality from living.dm (~ line 410). Sensible for big war form to be strong at grabs, however. Magisterium: I believe it increases the grab force and makes grabs start off as Aggressive instead of Passive?
 		TRAIT_GIANT, // Sabby: present in oldcode. simple functionality at tackle.dm row 380. Makes target harder to tackle. It's a giant war form, complete with sprite and pixel offset.
 		TRAIT_PUSHIMMUNE, // Sabby: present in oldcode. According to living_devense.dm, it prevents an agg grab. By name, I thought it would prevents shove. I still believe it makes sense for a war form to not be agg grabbed. However, a crinos should be able to?
 		TRAIT_HARDLY_WOUNDED, // Sabby: present in oldcode. Functionality found in wounds.dm line 61. I don't quite understand what it does, however. Reduces wounds from damage? What does that mean?
 		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED, // Sabby: new feature. Found from declarations list and studied from item_attack.dm line 463 and tackle.dm. Basically keeps target from getting knocked down on hand-to-hand? Makes sense for a war form, however would like to add excpetion for attacks coming from a crinos.
 		TRAIT_NO_STAGGER, // Sabby: new feature. Found from declarations list and studied from staggered.dm. Prevents application of /datum/status_effect/staggered (which is basically a daze sort of effect). Reason: large, lumbering war form. Again, exception vs crinos?
 		TRAIT_NO_THROW_HITPUSH, // Sabby: new feature. Found from declarations list and studied from staggered.dm line 1330. Basically: prevents application of hitpush when hit by thrown items. Reasoning: same as above.
-		TRAIT_NO_UNDERWEAR, // Sabby: saw this on Fera code. Is it relevant, considering I added setting underwear to none manually below on species gain?
+		TRAIT_NO_UNDERWEAR, // Sabby: saw this on Fera code. Is it relevant, considering I added setting underwear to none manually below on species gain? Magisterium: The trait is quicker than doing the whole set on species gain, so you can remove that.
 		TRAIT_NO_BLOOD_OVERLAY, // Sabby: got this from Fera code. Seems like it prevents bloody footprints? Might remove for Zulo.
-		TRAIT_NO_LYING_ANGLE, // Sabby: got this from Fera code. Seems to just prevent sprite from going horizontal? Could be relevant.
+		TRAIT_NO_LYING_ANGLE, // Sabby: got this from Fera code. Seems to just prevent sprite from going horizontal? Could be relevant. Magisterium: Yes, although you want an indicstor this mob was downed, so you probably don't want this trait.
 		TRAIT_TRANSFORM_UPDATES_ICON, // Sabby: taken from fera code. Honestly not sure what it does. Need some assist.
 		TRAIT_PULL_BLOCKED, // Sabby: found this in declarations, but it seems to have no code anywhere? By the name, would make sense for zulo.
 		TRAIT_NO_CUFF, // Sabby: huge, monstrous warform probably impossible to cuff
-		TRAIT_USES_SKINTONES // Sabby: noticed it present in many living/carbon/ species (vampire.dm, humans.dm, etc.). Important? Still not sure what it does.
+		TRAIT_USES_SKINTONES // Sabby: noticed it present in many living/carbon/ species (vampire.dm, humans.dm, etc.). Important? Still not sure what it does. Magisterium: It sets whether the species/mob has different skin tones/colours or not.
 	)
 	no_equip_flags = ITEM_SLOT_ON_BODY | ITEM_SLOT_MASK | ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_ICLOTHING | ITEM_SLOT_SUITSTORE
-	changesource_flags = NONE /* Sabby: doesn't this need to be set to the individual flags, using Blood form as example? */
+	changesource_flags = NONE /* Sabby: doesn't this need to be set to the individual flags, using Blood form as example? */ Magisterium: changesource_flags is a list of what can turn someone into that mob, mostly for base TG stuff like transformation spells and the pride mirror.
 /* Sabby: Needs to make sure to maintain Kindred blood type, as this is speciescode and doesn't derive from the splat */
 	exotic_bloodtype = BLOOD_TYPE_KINDRED
 
@@ -98,18 +100,18 @@ HOWEVER, this is /datum/splat/, not /datum/species/. Do I need to replicate the 
 organ tongue, and can be brought in via mutant similarly to how it works for werewolf code */
 	mutanttongue = /obj/item/organ/tongue/vampire // there is such a thing in vampire.dm - need to study it
 
-/* Visible gender override, I believe, is just fluff stuff? Do we care about this for zulo, given it may eventually have many diverse sprites */
+/* Visible gender override, I believe, is just fluff stuff? Do we care about this for zulo, given it may eventually have many diverse sprites */ //Magisterium: Shouldn't be needed. Zulo form won't be divided by gender anyway.
 	visible_gender_override = "beast"
 
 /* Sabby: necessary var for capturing pre-Zulo appearance stat for transformation appearance change/restore */
 	var/old_appearance
 
-/* form what i understand, this has to do with a procedure called update_body_parts and update_damage_parts to allow it to override renders. Do we want that?*/
+/* form what i understand, this has to do with a procedure called update_body_parts and update_damage_parts to allow it to override renders. Do we want that?*/ //Magisterium: That's for if you want to use a damage overlay that isn't the standard human one, which you will want in this case, or you'll have a human outline in blood whenever they're injured.
 	var/custom_body_render = TRUE
 	var/custom_damage_render = TRUE
 
 /* Below was also borrowed from shifter/dire. We might have to do limb overrides for zulo, considering most don't look distinctly human?
-The zulo bodypart items and zulo organs/limbs do not exist at all in code, for purposes of damage, etc.
+The zulo bodypart items and zulo organs/limbs do not exist at all in code, for purposes of damage, etc. Magisterium: The limb appearances can be overriden too, but you'll need to add the individual limbs in too. Maybe buff the limb health from baseline a little.
 */
 	bodypart_overrides = list(
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/zulo,
@@ -120,12 +122,12 @@ The zulo bodypart items and zulo organs/limbs do not exist at all in code, for p
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/zulo,
 	)
 
-/* Do we want to set specific pixel offsets? Check oldcode. Below values are placeholders */
+/* Do we want to set specific pixel offsets? Check oldcode. Below values are placeholders */ //Magisterium: Depends on the sprite size. If it'll end up looking too tall/weird, it may be useful.
 	var/mob_pixel_w = -1
 	var/mob_pixel_z = -1
 
 	/// Sabby: +3 stat boots to all physical stats, as per V20 - pages: 242
-	/// Sabby: note - Zulo should set appearance to 0. This is handled in code below on species gain, works differently from this list.
+	/// Sabby: note - Zulo should set appearance to 0. This is handled in code below on species gain, works differently from this list. //That's using the garou code method, which isn't necessary for this since you don't neee to accomodate multipke forms. You can just add a bonus of 3 to each of the physical stats.
 	var/list/form_bonus_stats = list(
 	STAT_STRENGTH = 3,
 	STAT_DEXTERITY = 3,
