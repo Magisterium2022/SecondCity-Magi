@@ -46,11 +46,14 @@
 
 	// Check range for targets with that have warped time this round and display them, if any exist
 	var/list/targets = list()
+	var/list/targets_weak = list()
 	for(var/mob/living/carbon/human/target in view(range, owner))
 		if(target == owner)
 			continue
-		if(HAS_TRAIT(target, TRAIT_TIMEWARPER))
+		if(HAS_TRAIT(target, TRAIT_TIMEWARPER)) //Temporis and other obvious time warping effects.
 			targets += target
+		if(HAS_TRAIT(target, TRAIT_TIMEWARPER_MINOR)) //Celerity and other weak time warping effects.
+			targets_weak += target
 	if(targets.len)
 		var/target_list = ""
 		for(var/i = 1 to targets.len)
@@ -61,6 +64,16 @@
 			else if(i == targets.len - 1)
 				target_list += " and "
 		to_chat(owner, span_notice("[english_list(targets)] [targets.len == 1 ? "has" : "have"] temporal distortions around [targets.len == 1 ? "themself" : "themselves"]."))
+	if(targets_weak.len)
+		var/target_weak_list = ""
+		for(var/i = 1 to targets_weak.len)
+			var/mob/living/carbon/human/target = targets_weak[i]
+			target_weak_list += target.name
+			if(i < targets_weak.len - 1)
+				target_weak_list += ", "
+			else if(i == targets_weak.len - 1)
+				target_weak_list += " and "
+		to_chat(owner, span_notice("[english_list(targets_weak)] [targets_weak.len == 1 ? "has" : "have"] weak temporal distortions around [targets_weak.len == 1 ? "themself" : "themselves"]."))
 	else
 		to_chat(owner, span_notice("There are no temporal distortions nearby."))
 
@@ -79,9 +92,25 @@
 
 	cooldown_length = 15 SECONDS
 
+
+/datum/storyteller_roll/temporis/recurring_contemplation_roll
+	bumper_text = "Recurring Contemplation"
+	applicable_stats = list(STAT_MANIPULATION, STAT_OCCULT)
+	numerical = TRUE
+	roll_output_type = ROLL_PRIVATE
+
+/datum/discipline_power/temporis/recurring_contemplation/pre_activation_checks(mob/living/target)
+	. = ..()
+	recurring_contemplation_roll = new()
+	recurring_contemplation_roll.difficulty = target.st_get_stat(STAT_TEMPORARY_WILLPOWER)
+	successes = recurring_contemplation_roll.st_roll(owner, target)
+
 /datum/discipline_power/temporis/recurring_contemplation/activate(mob/living/target)
 	. = ..()
-	target.AddComponent(/datum/component/dejavu, rewinds = 4, interval = 2 SECONDS)
+	if(successes <= 0)
+		to_chat(owner, span_notice("Your efforts fail to loop [target]!"))
+		return
+	target.AddComponent(/datum/component/dejavu, rewinds = (successes * (1 MINUTE / city_time_rate_multiplier)), interval = (5 SECONDS))
 
 //LEADEN MOMENT
 /datum/discipline_power/temporis/leaden_moment
@@ -96,20 +125,44 @@
 	hostile = TRUE
 
 	multi_activate = TRUE
-	duration_length = 15 SECONDS
 	cooldown_length = 15 SECONDS
+
+/datum/storyteller_roll/temporis/leaden_moment_roll
+	bumper_text = "Leaden Moment"
+	applicable_stats = list(STAT_INTELLIGENCE, STAT_OCCULT)
+	numerical = TRUE
+	roll_output_type = ROLL_PRIVATE
+
+/datum/movespeed_modifier/temporis
+/datum/actionspeed_modifier/status_effect/temporis
+
+/datum/discipline_power/temporis/leaden_moment/pre_activation_checks(mob/living/target)
+	. = ..()
+	leaden_moment_roll = new()
+	successes = leaden_moment_roll.st_roll(owner, target)
 
 /datum/discipline_power/temporis/leaden_moment/activate(mob/living/target)
 	. = ..()
+	if(successes == 0)
+		to_chat(owner, span_notice("Your efforts fail to slow [target]] down!"))
+		return
+	var/datum/movespeed_modifier/temporis/leaden_moment = new()
+	var/datum/actionspeed_modifier/status_effect/temporis/leaden_moment_action = new()
+	leaden_moment.multiplicative_slowdown = (2 + round(abs(successes / 2)))
+	leaden_moment_action.multiplicative_slowdown = (2 + round(abs(successes / 2)))
+	var/duration = (1 TURNS * round(abs(successes / 2)))
+	if(successes < 0)
+		to_chat(owner, span_userdanger("<b>Slow down.</b>"))
+		owner.add_movespeed_modifier(/datum/movespeed_modifier/temporis)
+		owner.add_actionspeed_modifier(leaden_moment_action)
+		addtimer(CALLBACK(owner, PROC_REF(remove_movespeed_modifier), /datum/movespeed_modifier/temporis, duration))
+		addtimer(CALLBACK(owner, PROC_REF(remove_actionspeed_modifier), /datum/actionspeed_modifier/status_effect/temporis, duration))
 	to_chat(target, span_userdanger("<b>Slow down.</b>"))
 	target.add_movespeed_modifier(/datum/movespeed_modifier/temporis)
+	target.add_actionspeed_modifier(leaden_moment_action)
+	addtimer(CALLBACK(target, PROC_REF(remove_movespeed_modifier), /datum/movespeed_modifier/temporis, duration))
+	addtimer(CALLBACK(target, PROC_REF(remove_actionspeed_modifier), /datum/actionspeed_modifier/status_effect/temporis, duration))
 
-/datum/discipline_power/temporis/leaden_moment/deactivate(mob/living/target)
-	. = ..()
-	target.remove_movespeed_modifier(/datum/movespeed_modifier/temporis)
-
-/datum/movespeed_modifier/temporis
-	multiplicative_slowdown = 7.5
 
 //PATIENCE OF THE NORNS
 /datum/discipline_power/temporis/patience_of_the_norns
