@@ -9,12 +9,12 @@ I used the fera_species.dm code as a base template
 /* Sabby: Okay. I commented rows below (19 to 32) for a specific reason: /mob/living/carbon/human/ is already inherent to base TG code, correct? And I'm using, as stated above,
 the fera_species.dm file as a basis for the new zulo refactor, as recommended by Abby. The thing is that, since that original fera_species.dm is already defining
 for /mob/living/carbon/human an update_pode_parts proc, then if I keep this duplicated in the new zulo file, it will cause errors because it's a duplicate of
-something being created for a universal human carbon mob, right?
+something being created for a universal human carbon mob, right? Magisterium: That's correct.
 
 And these rows basically allow the carbon mob to override the original base tg human sprite in favor of, for example, the weretzi sprite, correct?
 
 Please correct me if I'm wrong! And if that's also the case, could it maybe be a good idea to move those original rows from fera_species.dm out into a sort of
-universal 'human carbon mob utilities' sort of .dm file for people to reference? */
+universal 'human carbon mob utilities' sort of .dm file for people to reference? That actually exists already, as the base human file, but Darkpack is very obsessed with splitting off all of their changes into different places to keep it seperate. */
 
 // /mob/living/carbon/human/update_body_parts(update_limb_data)
 // 	if(dna?.species?.update_body_parts(src))
@@ -36,7 +36,7 @@ and it is basically a base shifter form full of declared vars. Then it builds th
 type and modifying the declared vars in the shifter type.
 
 This is not needed for Zulo form, because it's one zulo form. So is it acceptable practice to just do the single species datum, declare its vars and already
-set the var values in its declarations (such as, for example, the list of stat bonuses)?
+set the var values in its declarations (such as, for example, the list of stat bonuses)? Magisterium: There's no issues with just creating and defining a single species, no.
 */
 
 
@@ -127,16 +127,16 @@ The zulo bodypart items and zulo organs/limbs do not exist at all in code, for p
 	var/mob_pixel_z = -1
 
 	/// Sabby: +3 stat boots to all physical stats, as per V20 - pages: 242
-	/// Sabby: note - Zulo should set appearance to 0. This is handled in code below on species gain, works differently from this list. //That's using the garou code method, which isn't necessary for this since you don't neee to accomodate multipke forms. You can just add a bonus of 3 to each of the physical stats.
+	/// Sabby: note - Zulo should set appearance to 0. This is handled in code below on species gain, works differently from this list. Magisterium: That's using the garou code method, which isn't necessary for this since you don't neee to accomodate multiple forms. You can just add a bonus of 3 to each of the physical stats.
 	var/list/form_bonus_stats = list(
 	STAT_STRENGTH = 3,
 	STAT_DEXTERITY = 3,
 	STAT_STAMINA = 3
 	)
-	/// Fallback dmi to refrence if we fail to get one from our splat (this is what original comment said. Confused on how to implement for zulo?)
+	/// Fallback dmi to refrence if we fail to get one from our splat (this is what original comment said. Confused on how to implement for zulo?) Magisterium:That'd be a basic dmi with a basic sprite so they don't turn invisible if anything goes wrong. You'd want to create a backup one in that case.
 	var/fallback_icon = 'path/to/zulo.dmi'
 
-	/* do we need to set speedmod's value into a var to be used below, or do we just want to declare the var value here and that's it? */
+	/* do we need to set speedmod's value into a var to be used below, or do we just want to declare the var value here and that's it? Magisterium: You'd want to apply the speed mod, ideally, but ZUlo wouldn't get any base speed mod anyway, besides what they get from bonus dex.*/
 	/// Speed mod applied and removed upon gaining this species
 	var/speed_mod = /datum/movespeed_modifier/tzimisce_zulo_form
 
@@ -154,24 +154,24 @@ And vars and procs (such as add_buffs) don't necesarily have to come before the 
 
 On_Species_loss just reverts the character to baseline carbon human, undoes all changes.
 
-Am I correct in this?
+Am I correct in this? Magisterium: Yes for species gain, on_species_loss can be set to remove all of the changes, but it's just a proc, so it won't do anything unless you tell it to. It can also do other things if you need it to adjust anything else.
 
 And then, all that the code below does is:
-Apply on_species_gain to zulo form. And it does not need a /proc/ here because it already exists as a proc for /datum/species as a base,
-in _species.dm, right? Defines human_who_gained_species for the code following
+Apply on_species_gain to zulo form. And it does not need a /proc/ here because it already exists as a proc for /datum/species as a base, 
+in _species.dm, right? Defines human_who_gained_species for the code following  Magisterium: That's correct.
 
-I do not understand why it needs the "old_species" definition
-Do not yet understand what pref_load and regenerate_icons do
+I do not understand why it needs the "old_species" definition 
+Do not yet understand what pref_load and regenerate_icons do Magisterium: regenerate_icons re-loads the icons (appearance) for the entity. pref_load loads some details from preferences.
 */
 /datum/species/tzimisce_zulo_form/on_species_gain(mob/living/carbon/human/human_who_gained_species, datum/species/old_species, pref_load, regenerate_icons)
 	. = ..()
 	if(speed_mod)
 		human_who_gained_species.add_movespeed_modifier(speed_mod)
-	human_who_gained_species.hairstyle = "Bald" // Sabby: same as oldcode. Necessary?
+	human_who_gained_species.hairstyle = "Bald" // Sabby: same as oldcode. Necessary? 
 	human_who_gained_species.facial_hairstyle = "Shaved" // Sabby: same as oldcode. Necessary?
 	human_who_gained_species.undershirt = "Nude" // Sabby: same as oldcode. Necessary?
 	human_who_gained_species.underwear = "Nude" // Sabby: same as oldcode. Necessary?
-	human_who_gained_species.socks = "Nude" // Sabby: same as oldcode. Necessary?
+	human_who_gained_species.socks = "Nude" // Sabby: same as oldcode. Necessary? Magisterium: Only if not using the no underclothing trait.
 	/*Sabby: looking through the code, I noticed that such things exists in buffs.dm and and so on. Basically,
 	they work to prevent a given datum from suffering from any damage-based movespeed penalties? It seems fair to apply
 	to zulo, given it's a large warform? Possibly same for Crinos, in fact.
@@ -197,7 +197,7 @@ Do not yet understand what pref_load and regenerate_icons do
 	. = ..()
 	if(speed_mod)
 		human.remove_movespeed_modifier(speed_mod)
-	/* Sabby: below is taken from oldcode to revert the = "bald" and = "nude" on_gain settinge from above. Does it work?
+	/* Sabby: below is taken from oldcode to revert the = "bald" and = "nude" on_gain settinge from above. Does it work? Magisterium:Should do, I'd have to test it to be sure. But you can also save the details ahead of time, or just use the trait from Garou.
 	From my understanding, the /choiced/hairstyle, etc. stuff is what's needed to call the player's selected things?
 	*/
 	if(human.client)
@@ -235,23 +235,23 @@ So the rows below are first defining the add_buffs procedure to be called somewh
 Should_add_buff is called internally by this first one.
 Then it sets up clear_buffs which just *also8 runs through the form_bonus_stats list and reverses them.
 */
-/datum/species/tzimisce_zulo_form/proc/add_buffs(mob/living/carbon/human/human)
+/datum/species/tzimisce_zulo_form/proc/add_buffs(mob/living/carbon/human/human) //Magisterium: This really isn't necessary, you can just add the stat buffs as basic buffs, since you don't need to accomodate multiple different forms.
 	for(var/key, value in form_bonus_stats)
 		if(!should_add_buff(human, key, value))
 			continue
-		human.st_add_stat_mod(key, value, type) //Sabby: this is throwing me for a loop (eheheh). What is the 'type' part here of this procedure? Is that tzimisce_zulo_form?
+		human.st_add_stat_mod(key, value, type) //Sabby: this is throwing me for a loop (eheheh). What is the 'type' part here of this procedure? Is that tzimisce_zulo_form? Magisterium: Type is just the name of the buff, so you can pick it out to remove that buff specifically. It can be anything.
 
 /datum/species/tzimisce_zulo_form/proc/should_add_buff(mob/living/carbon/human/human, datum/st_stat/buff_type, amount)
 	return TRUE
 
-/datum/species/tzimisce_zulo_form/proc/clear_buffs(mob/living/carbon/human/human)
+/datum/species/tzimisce_zulo_form/proc/clear_buffs(mob/living/carbon/human/human) //Magisterium: As with adding, this really isn't necessary, just remove the buffs on the on_species_loss.
 	for(var/key, value in form_bonus_stats)
 		human.st_remove_stat_mod(key, type)
 
 /* Sabby: NEED TO STILL REVIEW AND ADAPT THIS BASED ON HOW WEREWOLF CODE WORKS */
 
-/* Sabby: This below comes from werewolf code. And says it's to fetch the mob.dmi from the splat?
-Completely lost here.
+/* Sabby: This below comes from werewolf code. And says it's to fetch the mob.dmi from the splat? 
+Completely lost here. Magisterium: This gets a number of details from the owner's preferences as to what icons it should use,t hen applies them as modifiers to the basic icon title to change the name to another icon title, to make it pick the icon.
 */
 // /datum/species/human/shifter/proc/get_mob_icon(mob/living/carbon/human/human)
 // 	var/datum/splat/werewolf/shifter/shifter_splat = get_shifter_splat(human)
