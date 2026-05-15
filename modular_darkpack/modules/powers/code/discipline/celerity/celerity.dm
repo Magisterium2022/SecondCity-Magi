@@ -23,6 +23,10 @@
 
 	return POWER_CANCEL_ACTIVATION
 
+/datum/discipline_power/celerity/activate()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_TIMEWARPER_MINOR, DISCIPLINE_TRAIT(type))
+
 //CELERITY 1
 /datum/discipline_power/celerity/one
 	name = "Celerity 1"
