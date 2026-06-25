@@ -120,5 +120,11 @@
 
 /datum/discipline_power/chi/yin_prana/semblance_of_the_ebon_queen/deactivate() //
 	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_GODMODE, CHI_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, CHI_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_PACIFIST, CHI_TRAIT)
 	REMOVE_TRAIT(owner, TRAIT_GHOST_VISION, CHI_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_SIXTHSENSE, CHI_TRAIT)
 	owner.update_sight()
+	owner.incorporeal_move = FALSE
+	owner.invisibility = INVISIBILITY_NONE
