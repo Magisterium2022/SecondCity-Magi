@@ -11,6 +11,9 @@
 #define SPLAT_CORAX "splat_corax"
 #define SPLAT_SHIFTERS list(SPLAT_GAROU, SPLAT_CORAX)
 
+///Parent type for Numina.
+#define SPLAT_NUMINA "splat_numina"
+
 #define SPLAT_PRIO_HALFSPLAT 100
 #define SPLAT_PRIO_SPLAT 200
 
