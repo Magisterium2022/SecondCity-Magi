@@ -51,7 +51,7 @@
 	. = ..()
 
 /datum/action/discipline/numina/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE) //This actually handles the overwrite.
-	button_icon = 'modular_tfn/modules/numina/icons/numina.dmi' //Thanks again, Chaz. Lifesaver.
+	button_icon = 'modular_tfn/modules/numina/icons/numina.dmi
 	icon_icon = 'modular_tfn/modules/numina/icons/numina.dmi'
 	background_icon_state = "default"
 	button_icon_state = "default"
