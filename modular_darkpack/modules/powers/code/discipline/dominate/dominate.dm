@@ -522,7 +522,7 @@
 	SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
 
 //AUTONOMIC MASTERY
-/datum/discipline_power/dominate/autonomic_mastery
+/datum/discipline_power/dominate/autonomic_mastery //Technically a 7th dot, but the V20 6th dots aren't easily implemented.
 	name = "Autonomic Mastery"
 	desc = "Control the Autonomic Systems of a target."
 
@@ -533,11 +533,12 @@
 
 	cooldown_length = 15 SECONDS
 	range = 7
+	var/success_duration
 
 /datum/discipline_power/dominate/autonomic_mastery/pre_activation_checks(mob/living/carbon/human/target)
-
-	var/roll_success = dominate_check(owner, target)
-	if(roll_success)
+	var/successes = dominate_check(owner, target, list(STAT_MANIPULATION, STAT_MEDICINE), numerical = TRUE)
+	if(successes > 0)
+		success_duration = successes
 		return TRUE
 	else
 		do_cooldown(cooldown_length)
@@ -546,14 +547,14 @@
 /datum/discipline_power/dominate/autonomic_mastery/activate(mob/living/carbon/human/target)
 	. = ..()
 	to_chat(owner, span_warning("You've successfully dominated [target]'s bodily functions!"))
-	var/list/orders = list("Sleep", "Wake", "Heart Attack", "Revive")
+	var/list/orders = list("Sleep", "Wake", "Heart Attack", "Revive", "Become Blind", "See", "Stop Breathing", "Start Breathing")
 	var/order = tgui_input_list(owner, "Select a Command","Command Selection", orders)
 	if(!order)
 		return
 	switch(order)
 		if("Sleep")
 			owner.say("Sleep")
-			target.Sleeping(200)
+			target.Sleeping(success_duration TURNS)
 			to_chat(target, span_danger("You feel suddenly exhausted"))
 			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
 		if("Wake")
@@ -566,6 +567,7 @@
 			target.adjust_stamina_loss(60, FALSE)
 			target.set_heartattack(TRUE)
 			to_chat(target, span_danger("You feel a terrible pain in your chest!"))
+			addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, end_heart_attack), target), success_duration TURNS
 			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
 		if("Revive")
 			owner.say("Live")
@@ -573,5 +575,41 @@
 			to_chat(target, span_danger("You feel your heart pound!"))
 			target.revive()
 			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
+		if("Become Blind")
+			owner.say("Become Blind")
+			cast_on.adjust_temp_blindness(success_duration TURNS)
+			cast_on.set_eye_blur_if_lower(success_duration TURNS)
+			to_chat(target, span_danger("Your vision fades!"))
+			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
+		if("See")
+			owner.say("See")
+			cast_on.adjust_temp_blindness(0)
+			cast_on.set_eye_blur_if_lower(0)
+			to_chat(target, span_danger("Your vision returns!"))
+			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
+		if("Stop Breathing")
+			owner.say("Stop Breathing")
+			to_chat(target, span_danger("Your lungs seize up!"))
+			if(HAS_TRAIT(target, TRAIT_NOBREATH))
+				to_chat(target, span_danger("...But you don't need to breathe."))
+			owner.losebreath += 5
+			ADD_TRAIT(target, TRAIT_MUTE, DISCIPLINE_TRAIT)
+			addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, end_suffocating), target), success_duration TURNS)
+			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
+		if("Start Breathing")
+			owner.say("Start Breathing")
+			REMOVE_TRAIT(target, TRAIT_MUTE, DISCIPLINE_TRAIT)
+			to_chat(target, span_danger("You can breathe again!"))
+			owner.losebreath = 0
+			SEND_SOUND(target, sound('modular_darkpack/modules/powers/sounds/dominate.ogg'))
+
+/datum/discipline_power/dominate/autonomic_mastery/proc/end_heart_attack(mob/living/carbon/human/target)
+	target.set_heartattack(FALSE)
+	to_chat(target, span_danger("You feel your heart pound!"))
+
+/datum/discipline_power/dominate/autonomic_mastery/proc/end_suffocating(mob/living/carbon/human/target)
+	REMOVE_TRAIT(target, TRAIT_MUTE, DISCIPLINE_TRAIT)
+	to_chat(target, span_danger("Your breathing eases!"))
+	owner.losebreath = 0
 
 #undef TRAIT_MESMERIZED
