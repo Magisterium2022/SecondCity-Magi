@@ -234,3 +234,50 @@
 /obj/projectile/bullet/darkpack/vamp75/silver/on_hit(atom/target, blocked = FALSE, pierce_hit)
 	. = ..()
 	fera_silver_damage(target, 5) //Same as silver longsword; it's a solid silver ball. As the founding fathers intended.
+
+//10mm Bullet
+/obj/projectile/bullet/darkpack/vamp10mm
+	name = "10mm bullet"
+	damage = 20
+	armour_penetration = 10
+
+/obj/projectile/bullet/darkpack/vamp10mm/silver
+	name = "10mm silver bullet"
+	damage = 20
+	armour_penetration = 10
+
+/obj/projectile/bullet/darkpack/vamp10mm/silver/on_hit(atom/target, blocked = FALSE, pierce_hit)
+	. = ..()
+	fera_silver_damage(target, 2)
+
+/obj/projectile/bullet/darkpack/vamp10mm/incendiary
+	name = "10mm incendiary bullet"
+	damage = 20
+	armour_penetration = 10
+	var/fire_stacks = 4
+
+/obj/projectile/bullet/darkpack/vamp10mm/incendiary/on_hit(atom/target, blocked = FALSE, pierce_hit)
+	. = ..()
+	if(iscarbon(target))
+		var/mob/living/carbon/M = target
+		M.adjust_fire_stacks(fire_stacks)
+		M.ignite_mob()
+
+//.75 Wristbreaker
+/obj/projectile/bullet/darkpack/vamp75syndicate
+	name = ".75 Mjolnir"
+	damage = 75
+	armour_penetration = 30
+	exposed_wound_bonus = 5
+	wound_bonus = 5
+
+// .45 Colt
+/obj/projectile/bullet/darkpack/vamp45colt //Original powder load performance is actually about the same as ACP, but higher loads are fine with modern pistols.
+	name = ".45 Colt bullet"
+	damage = 30
+	armour_penetration = 10
+
+/obj/projectile/bullet/darkpack/vamp45colt/peacemaker //Penetrates any non-living matter.
+	name = ".45 Colt bullet"
+	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE | PASSCLOSEDTURF | PASSMACHINE | PASSSTRUCTURE | PASSDOORS
+	armour_penetration = 100

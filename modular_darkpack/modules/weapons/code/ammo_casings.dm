@@ -203,3 +203,14 @@
 	projectile_type = /obj/projectile/bullet/darkpack/vamp75/silver
 	icon_state = "scartridge"
 	base_icon_state = "scartridge"
+
+/obj/item/ammo_casing/vampire/c10mm
+	name = "10mm bullet casing"
+	desc = "A 10mm bullet casing."
+	caliber = CALIBER_10MM
+	projectile_type = /obj/projectile/bullet/darkpack/vamp10mm
+
+// PAWS Taser
+
+/obj/item/ammo_casing/energy/electrode/darkpack/paws
+	projectile_type = /obj/projectile/energy/electrode/darkpack/paws

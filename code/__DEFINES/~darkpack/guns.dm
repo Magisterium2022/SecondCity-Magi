@@ -10,3 +10,5 @@
 #define CALIBER_CROSSBOWBOLT "bolt"
 #define CALIBER_762NATO "7.62x51mm NATO"
 #define CALIBER_75BALL ".75 ball"
+#define CALIBER_75SYNDICATE ".75 syndicate"
+#define CALIBER_45COLT ".45 Colt"
