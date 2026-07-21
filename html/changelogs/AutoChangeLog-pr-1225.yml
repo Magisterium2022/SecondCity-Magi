@@ -1,0 +1,5 @@
+author: "FalloutFalcon"
+delete-after: True
+changes:
+  - rscadd: "The strange goat plushie has some extra interactions"
+  - rscadd: "Adds our plushies to a few spots that was missed, primarly the arcade lootpool"

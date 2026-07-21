@@ -1,0 +1,4 @@
+author: "FalloutFalcon"
+delete-after: True
+changes:
+  - code_imp: "changelog is generated once a day instead of a week"
