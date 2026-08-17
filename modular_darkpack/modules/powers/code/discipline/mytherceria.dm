@@ -25,6 +25,7 @@
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
 	target_type = TARGET_MOB
 	range = 7
+	vitae_cost = 0
 
 	cooldown_length = 10 SECONDS
 
