@@ -9,7 +9,10 @@
 	var/list/alt_job_titles = list()
 	/// Whether this player is whitelisted to bypass discipline sheet validation limits
 	var/discipline_trusted = FALSE
-
+	// A list of all saved traits permanently applied to a character.
+	var/list/saved_traits = list()
+	// A list of all saved spells permanently applied to a character. 
+	var/list/saved_spells = list()
 
 /datum/preferences/load_preferences()
 	discipline_trusted = savefile.get_entry("discipline_trusted", FALSE) // deserialization and its consequences
