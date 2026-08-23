@@ -30,6 +30,8 @@
 	guestbook_names = SANITIZE_LIST(guestbook_names)
 	alt_job_titles = save_data?["alt_job_titles"] // ALTERNATIVE_JOB_TITLES
 	discipline_levels = SANITIZE_LIST(save_data?["discipline_levels"]) || list()
+	saved_traits = SANITIZE_LIST(save_data?["saved_traits"]) || list()
+	saved_spells = SANITIZE_LIST(save_data?["saved_spells"]) || list()
 
 /datum/preferences/save_character()
 	. = ..()
@@ -41,4 +43,6 @@
 	save_data["guestbook_names"] = guestbook_names
 	save_data["alt_job_titles"] = alt_job_titles // ALTERNATIVE_JOB_TITLES
 	save_data["discipline_levels"] = discipline_levels
+	save_data["saved_traits"] = saved_traits
+	save_data["saved_spells"] = saved_spells
 	savefile.save()
