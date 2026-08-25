@@ -450,19 +450,30 @@ ADMIN_VERB(give_spell, R_FUN, "Give Spell", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CAT
 		return
 
 	var/robeless = (tgui_alert(user, "Would you like to force this spell to be robeless?", "Robeless Casting?", list("Force Robeless", "Use Spell Setting")) == "Force Robeless")
+//DARKPACK EDIT - PERMANENT SPELLS AND TRAITS	
+	var/permanent = (tgui_alert(user, "Would you like to add this spell permanently? This will make it persist between rounds until removed.", "Permanent Spell?", list("Yes", "No")) == "Yes")
+//DARKPACK EDIT END- PERMANENT SPELLS AND TRAITS	
 
 	if(QDELETED(spell_recipient))
 		to_chat(user, span_warning("The intended spell recipient no longer exists."))
 		return
 
 	BLACKBOX_LOG_ADMIN_VERB("Give Spell")
-	log_admin("[key_name(user)] gave [key_name(spell_recipient)] the spell [chosen_spell][robeless ? " (Forced robeless)" : ""].")
-	message_admins("[key_name_admin(user)] gave [key_name_admin(spell_recipient)] the spell [chosen_spell][robeless ? " (Forced robeless)" : ""].")
+	log_admin("[key_name(user)] gave [key_name(spell_recipient)] the spell [chosen_spell][robeless ? " (Forced robeless)" : ""][permanent ? " (Permanently)" : ""].") //DARKPACK EDIT - PERMANENT SPELLS AND TRAITS	- Added description for Permanent additions.
+	message_admins("[key_name_admin(user)] gave [key_name_admin(spell_recipient)] the spell [chosen_spell][robeless ? " (Forced robeless)" : ""][permanent ? " (Permanently)" : ""].")
 
 	var/datum/action/cooldown/spell/new_spell = new spell_path(spell_recipient.mind || spell_recipient)
 
 	if(robeless)
 		new_spell.spell_requirements &= ~SPELL_REQUIRES_WIZARD_GARB
+
+	if(permanent)
+		if(!spell_recipient.client)
+			log_admin("[key_name(user)] attempted to give [key_name(spell_recipient)] the spell [chosen_spell][robeless ? " (Forced robeless)" : ""] Permanently but was unable to due to them lacking a client.") //VERY edge case for if their client has disconnected or similar, but it's worth letting admins know something has gone wrong.
+			message_admins("[key_name(user)] attempted to give [key_name(spell_recipient)] the spell [chosen_spell][robeless ? " (Forced robeless)" : ""] Permanently but was unable to due to them lacking a client.")
+			return
+		spell_recipient.client.prefs.saved_spells += new_spell
+		spell_recipient.client.prefs.save_character()
 
 	new_spell.Grant(spell_recipient)
 
