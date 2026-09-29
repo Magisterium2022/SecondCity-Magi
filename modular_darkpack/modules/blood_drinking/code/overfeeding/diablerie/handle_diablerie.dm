@@ -1,4 +1,7 @@
 /mob/living/carbon/human/proc/handle_diablerie(mob/living/victim)
+	if(mob_human.stat == DEAD) //Adding a check here to prevent diablerie of someone who was FD'ed.
+		to_chat(src, span_userdanger("<b>[mob_human] has suffered Final Death, and their soul has fled.</b>"))
+		return
 
 	var/diablerie_prompt = tgui_alert(src, "Attempt to diablerize [victim]?", "Diablerize", list("Yes", "No"), "No")
 	switch(diablerie_prompt)
@@ -6,9 +9,12 @@
 			var/datum/splat/vampire/kindred/kindred = get_kindred_splat(src)
 			var/generation = get_generation()
 			var/victim_generation = victim.get_generation()
-
+			if(!do_after(src, 10 SECONDS)) //A simulacrum for the time it might require to do a series of contested strength rolls, since a struggling victim will already be doing those. 
+				to_chat(src, span_userdanger("You lose focus and are unable to complete your Diablerie!"))
+				return
 			if(kindred)
 				SEND_SIGNAL(victim, COMSIG_PATH_HIT, -1, 0, FALSE)
+
 			if(victim_generation >= generation)
 				message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
 				log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
